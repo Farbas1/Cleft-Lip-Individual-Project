@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+	
+	<title>About - Aesthetics Tool</title>
+    
+	<link href="styles/style.css" rel="stylesheet" type="text/css">
+	<link href="styles/framework.css" rel="stylesheet" type="text/css">
+	<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="styles/animate.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jqueryui.js"></script>
+	<script type="text/javascript" src="scripts/framework-plugins.js"></script>
+	<script type="text/javascript" src="scripts/custom.js"></script>	
+</head>
+
+<body class="left-sidebar"> 
+
+<div id="preloader">
+	<div id="status">
+        <div class="preloader-logo"></div>
+        <h3 class="center-text">Loading...</h3>
+        <p class="center-text smaller-text">
+            Please wait
+        </p>
+    </div>
+</div>
+    
+<div id="header-fixed" class="header-style-1">
+    <a class="header-1 open-left-sidebar" href="#"><i class="fa fa-navicon"></i></a>
+    <a class="header-2" href="#"><i class="fa fa-ellipsis-v"></i></a>
+    <a class="header-logo" href="#"><img src="images/logo-dark2.png" alt="img"></a>
+</div>
+            
+<div class="all-elements">
+    <div class="snap-drawers">
+        <div class="snap-drawer snap-drawer-left">        
+            <div class="sidebar-header-left">
+                <a href="#"><img src="images/logo-dark2.png" alt="img"></a>
+                <a class="close-sidebar" href="#"><i class="fa fa-times"></i></a>
+            </div>       
+        
+            <p class="sidebar-divider">Navigation</p>
+            
+            <div class="sidebar-menu">
+                <a class="menu-item" href="index.html">
+                    <i class="fa fa-folder"></i>
+                    <em>Local storage</em>
+                    <i class="fa fa-circle"></i>
+                </a>                
+                <a class="menu-item" href="cloud.html">
+                    <i class="fa fa-cloud"></i>
+                    <em>Cloud data</em>
+                    <i class="fa fa-circle"></i>
+                </a>                 
+                <a class="menu-item menu-item-active" href="about.html">
+                    <i class="fa fa-info-circle"></i>
+                    <em>About</em>
+                    <i class="fa fa-circle"></i>
+                </a>
+				<a class="menu-item show-bottom-notification-2 timer-notification" href="#">
+                    <i class="fa fa-refresh"></i>
+                    <em>Sync</em>
+                </a>                  
+                <a class="menu-item close-sidebar" href="#">
+                    <i class="fa fa-times"></i>
+                    <em>Close</em>
+                </a>
+            </div>
+            
+        </div>
+        
+        <div id="content" class="snap-content">
+            <div class="content">
+            <div class="header-clear"></div>
+            <!--Page content goes here, fixed elements go above the all elements class-->
+
+                <div class="heading-style-1 container half-bottom">
+                    <a href="#"><i class="fa fa-info-circle"></i></a>
+                    <h4>About</h4>
+                    <div class="heading-block bg-red-dark"></div>
+                    <div class="heading-decoration bg-red-dark"></div>
+                </div>
+                <div class="container">
+                    <p>
+                        This app is about...
+                    </p>
+                </div>
+                
+                <div class="decoration"></div>
+                
+            <!-- End of entire page content-->
+            </div> 
+        </div>
+    </div>  
+    <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
+</div>
+    
+<div class="bottom-notification-2 bottom-notification bg-orange-dark timeout-notification">
+    <h4>Sync Complete</h4>
+    <p>
+        Latest traces and scores uploaded to cloud.
+    </p>
+</div>	
+	
+</body>
+</html>
