@@ -15,7 +15,7 @@ function myFunction(arr) {
 						'<td><a href="' + arr[i].image + '" download="test"><i class="fa fa-download"></i> Download</a></td>' + 
 					'</tr>' + 
 					'<tr>' + 
-						'<td><a href="createdrawing.html"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
+						'<td><a href="#"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
 						'<td><a href="#"><i class="fa fa-times"></i> Close</a></td>' + 
 					'</tr>' + 
 				'</table>' + 
