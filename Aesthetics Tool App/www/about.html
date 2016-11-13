@@ -17,106 +17,86 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 	
-	<title>About - Aesthetics Tool</title>
+	<title>Local storage - Aesthetics Tool</title>
     
-	<link href="styles/style.css" rel="stylesheet" type="text/css">
-	<link href="styles/framework.css" rel="stylesheet" type="text/css">
+	<link href="styles/main.css" rel="stylesheet" type="text/css">
 	<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
-	<link href="styles/animate.css" rel="stylesheet" type="text/css">
 	
-	<script type="text/javascript" src="scripts/jquery.js"></script>
-	<script type="text/javascript" src="scripts/jqueryui.js"></script>
-	<script type="text/javascript" src="scripts/framework-plugins.js"></script>
-	<script type="text/javascript" src="scripts/custom.js"></script>	
+	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>	
 </head>
 
 <body class="left-sidebar"> 
-
-<div id="preloader">
-	<div id="status">
-        <div class="preloader-logo"></div>
-        <h3 class="center-text">Loading...</h3>
-        <p class="center-text smaller-text">
-            Please wait
-        </p>
-    </div>
+	
+<div id="navigation-header" class="header-border">
+	<a class="navigation-icon open-left-sidebar" href="#"><i class="fa fa-navicon fa-2x"></i></a>
+	<a class="overflow-icon" href="#"><i class="fa fa-ellipsis-v fa-2x"></i></a>
+	<a class="header-label" href="#"><img src="images/label.png" alt="label"></a>
 </div>
-    
-<div id="header-fixed" class="header-style-1">
-    <a class="header-1 open-left-sidebar" href="#"><i class="fa fa-navicon"></i></a>
-    <a class="header-2" href="#"><i class="fa fa-ellipsis-v"></i></a>
-    <a class="header-logo" href="#"><img src="images/logo-dark2.png" alt="img"></a>
-</div>
-            
+			
 <div class="all-elements">
-    <div class="snap-drawers">
-        <div class="snap-drawer snap-drawer-left">        
-            <div class="sidebar-header-left">
-                <a href="#"><img src="images/logo-dark2.png" alt="img"></a>
-                <a class="close-sidebar" href="#"><i class="fa fa-times"></i></a>
-            </div>       
-        
-            <p class="sidebar-divider">Navigation</p>
-            
-            <div class="sidebar-menu">
-                <a class="menu-item" href="index.html">
-                    <i class="fa fa-folder"></i>
-                    <em>Local storage</em>
-                    <i class="fa fa-circle"></i>
-                </a>                
-                <a class="menu-item" href="cloud.html">
-                    <i class="fa fa-cloud"></i>
-                    <em>Cloud data</em>
-                    <i class="fa fa-circle"></i>
-                </a>                 
-                <a class="menu-item menu-item-active" href="about.html">
-                    <i class="fa fa-info-circle"></i>
-                    <em>About</em>
-                    <i class="fa fa-circle"></i>
-                </a>
-				<a class="menu-item show-bottom-notification-2 timer-notification" href="#">
-                    <i class="fa fa-refresh"></i>
-                    <em>Sync</em>
-                </a>                  
-                <a class="menu-item close-sidebar" href="#">
-                    <i class="fa fa-times"></i>
-                    <em>Close</em>
-                </a>
-            </div>
-            
-        </div>
-        
-        <div id="content" class="snap-content">
-            <div class="content">
-            <div class="header-clear"></div>
-            <!--Page content goes here, fixed elements go above the all elements class-->
+	<div class="snap-drawers">
+		<div class="navigation-drawer-header">
+			<a href="#"><img src="images/label.png" alt="label"></a>
+			<a class="close-sidebar" href="#"><i class="fa fa-times fa-2x"></i></a>
+		</div>		 
+	
+		<p class="sidebar-divider">Navigation</p>
+		
+		<div class="sidebar-menu">
+			<a class="navigation-drawer-option navigation-drawer-option-active" href="index.html">
+				<i class="fa fa-folder"></i>
+				<em>Local storage</em>
+				<i class="fa fa-circle"></i>
+			</a>				
+			<a class="navigation-drawer-option" href="cloud.html">
+				<i class="fa fa-cloud"></i>
+				<em>Cloud data</em>
+				<i class="fa fa-circle"></i>
+			</a>				 
+			<a class="navigation-drawer-option" href="about.html">
+				<i class="fa fa-info-circle"></i>
+				<em>About</em>
+				<i class="fa fa-circle"></i>
+			</a>
+			<a class="navigation-drawer-option show-bottom-notification-2 timer-notification" href="#">
+				<i class="fa fa-refresh"></i>
+				<em>Sync</em>
+			</a>				  
+			<a class="navigation-drawer-option close-sidebar" href="#">
+				<i class="fa fa-times"></i>
+				<em>Close</em>
+			</a>
+		</div>
+					
+		<div id="content" class="snap-content">
+			<div class="content">
+			<div class="header-separation"></div>
+			<!--Page content goes here, fixed elements go above the all elements class-->
 
-                <div class="heading-style-1 container half-bottom">
-                    <a href="#"><i class="fa fa-info-circle"></i></a>
-                    <h4>About</h4>
-                    <div class="heading-block bg-red-dark"></div>
-                    <div class="heading-decoration bg-red-dark"></div>
-                </div>
-                <div class="container">
-                    <p>
-                        This app is about...
-                    </p>
-                </div>
-                
-                <div class="decoration"></div>
-                
-            <!-- End of entire page content-->
-            </div> 
-        </div>
-    </div>  
-    <a href="#" class="back-to-top-badge"><i class="fa fa-caret-up"></i>Back to top</a>
+				<div class="title-banner container half-bottom">
+					<i class="fa fa-info-circle"></i>
+					<h1>About</h1>
+					<div class="title-icon-border dark-blue"></div>
+					<div class="title-border dark-blue"></div>
+				</div>
+				<div class="container">
+					<p>
+						This app is
+					</p>
+				</div>
+				
+			<!-- End of entire page content-->
+			</div> 
+		</div>
+	</div>	
 </div>
-    
-<div class="bottom-notification-2 bottom-notification bg-orange-dark timeout-notification">
-    <h4>Sync Complete</h4>
-    <p>
-        Latest traces and scores uploaded to cloud.
-    </p>
+	
+<div class="bottom-notification-2 bottom-notification light-blue timeout-notification">
+	<h1>Sync Complete</h1>
+	<p>
+		Latest traces and scores uploaded to cloud.
+	</p>
 </div>	
 	
 </body>
