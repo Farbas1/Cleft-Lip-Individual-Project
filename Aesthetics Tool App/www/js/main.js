@@ -54,7 +54,7 @@ $( document ).ready(function() {
         $div.attr('class', 'not-active');
         var snapper = new Snap({
             element: document.getElementById('content'),
-            elementMirror: document.getElementById('header-fixed'),
+            elementMirror: document.getElementById('navigation-header'),
             elementMirror2: document.getElementById('footer-fixed'),
             disable: 'right',
             tapToClose: true,
