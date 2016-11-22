@@ -249,6 +249,11 @@
     display:block;
 }
 
+.view-image-size {
+	max-width:100%;
+	max-height:600px;
+}
+
 .activity-item:hover{
     cursor:pointer;
 }
@@ -378,4 +383,30 @@ body {
 #content {
 	background-color:#F5F5F5;
 	overflow-x:hidden;
+}
+
+.button {
+    border: none;
+    color: white;
+	width:100%;
+    padding: 15px 17px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.dblue {
+    background-color: #005ba8; /* Dark blue */
+}
+
+.lblue {
+    background-color: #8fc3ea; /* Light blue */
+}
+
+canvas {
+    cursor: crosshair;
+    border: 1px solid #000000;
+	max-height: 100%;
+	max-width: 100%;
 }

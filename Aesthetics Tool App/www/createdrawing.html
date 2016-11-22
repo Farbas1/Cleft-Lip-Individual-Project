@@ -23,7 +23,8 @@
 	<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
 	
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>	
+	<script type="text/javascript" src="js/main.js"></script>
+	
 </head>
 
 <body> 
@@ -53,8 +54,56 @@
 						Draw around the lip region in the image to generate a set of symmetry scores.
 					</p>
 				</div>
+
+				<canvas id="paint" class="canvas" width="200" height="200" style="background: url('images/faces/face1.jpg')"></canvas>
 				
-				<img src="images/faces/face1.jpg" alt="img">
+				<script>
+					(function() {
+						var canvas = document.querySelector('#paint');
+						var ctx = canvas.getContext('2d');
+
+						var mouse = {x: 0, y: 0};
+						var last_mouse = {x: 0, y: 0};
+
+						/* Mouse Capturing Work */
+						canvas.addEventListener('mousemove', function(e) {
+							last_mouse.x = mouse.x;
+							last_mouse.y = mouse.y;
+
+							mouse.x = e.pageX - this.offsetLeft;
+							mouse.y = e.pageY - this.offsetTop;
+						}, false);
+
+						/* Drawing on Paint App */
+						ctx.lineWidth = 2;
+						ctx.lineJoin = 'round';
+						ctx.lineCap = 'round';
+						ctx.strokeStyle = 'blue';
+
+						canvas.addEventListener('mousedown', function(e) {
+							canvas.addEventListener('mousemove', onPaint, false);
+						}, false);
+
+						canvas.addEventListener('mouseup', function() {
+							canvas.removeEventListener('mousemove', onPaint, false);
+						}, false);
+
+						var onPaint = function() {
+							ctx.beginPath();
+							ctx.moveTo(last_mouse.x, last_mouse.y);
+							ctx.lineTo(mouse.x, mouse.y);
+							ctx.closePath();
+							ctx.stroke();
+						};
+
+					}());
+				</script>
+				
+				<br></br>
+				<a href="" class="button lblue">Redraw</a> 
+				<br></br>
+				<a href="drawingsscores.html" class="button dblue">Generate Prediction</a>
+				
 			<!-- End of entire page content-->
 			</div> 
 		</div>

@@ -23,7 +23,8 @@
 	<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
 	
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>	
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/getlocalpatients.js"></script>
 </head>
 
 <body class="left-sidebar"> 
@@ -85,54 +86,9 @@
 						Images downloaded from the cloud are shown here.
 					</p>
 				</div>
-				
-				<div class="activity-item container">
-					<img src="images/faces/face1.jpg" alt="thumbnail">
-					<h2>Farbas Miah</h2>
-					<em>22:54:12 7th November 2016</em>
-					<a href="#" class="activity-item-toggle"><i class="fa fa-plus"></i></a>
-					<div class="activity-item-detail">
-						<table style="width:100%">
-							<tr>
-								<td><a href="images/faces/face1.jpg"><i class="fa fa-picture-o"></i> View image</a></td>
-								<td><a href="#" class="show-bottom-notification-2 timer-notification"><i class="fa fa-refresh"></i> Sync</a></td>
-							</tr>
-							<tr>
-								<td><a href="createdrawing.html"><i class="fa fa-pencil"></i> Create drawing</a></td>
-								<td><a href="#"><i class="fa fa-trash"></i> Delete</a></td>
-							</tr>
-							<tr>
-								<td><a href="#"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>
-								<td><a href="#"><i class="fa fa-times"></i> Close</a></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-				<div class="border"></div>
-				
-				<div class="activity-item container">
-					<img src="images/faces/face2.jpg" alt="thumbnail">
-					<h2>James Adams</h2>
-					<em>14:56:34 9th November 2016</em>
-					<a href="#" class="activity-item-toggle"><i class="fa fa-plus"></i></a>
-					<div class="activity-item-detail">
-						<table style="width:100%">
-							<tr>
-								<td><a href="images/faces/face2.jpg"><i class="fa fa-picture-o"></i> View image</a></td>
-								<td><a href="#" class="show-bottom-notification-2 timer-notification"><i class="fa fa-refresh"></i> Sync</a></td>
-							</tr>
-							<tr>
-								<td><a href="createdrawing.html"><i class="fa fa-pencil"></i> Create drawing</a></td>
-								<td><a href="#"><i class="fa fa-trash"></i> Delete</a></td>
-							</tr>
-							<tr>
-								<td><a href="#"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>
-								<td><a href="#"><i class="fa fa-times"></i> Close</a></td>
-							</tr>
-						</table>
-					</div>
-				</div>	
-				<div class="border"></div>
+					
+				<div id="id01"></div>
+				<script src="js/localpatientlist.js"></script>	
 				
 				<div class="footer">
 					<p class="center-text">Back to top</p>

@@ -665,3 +665,33 @@ $( document ).ready(function() {
     }
 }).call(this, window, document);
 }(jQuery));// JavaScript Document
+
+function getImageLocation(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+angular.module('croppy', [])
+  .directive('croppedImage', function () {
+      return {
+          restrict: "E",
+          replace: true,
+          template: "<div class='center-cropped'></div>",
+          link: function(scope, element, attrs) {
+              var width = attrs.width;
+              var height = attrs.height;
+              element.css('width', width + "px");
+              element.css('height', height + "px");
+              element.css('backgroundPosition', 'center center');
+              element.css('backgroundRepeat', 'no-repeat');
+              element.css('backgroundImage', "url('" + attrs.src + "')");
+          }
+      }
+  });
