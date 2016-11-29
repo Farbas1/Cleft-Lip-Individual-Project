@@ -1,4 +1,185 @@
-$( document ).ready(function() {
+$(document).ready(function() {
+
+	var myDB;
+	//Open Database Connection
+	document.addEventListener("deviceready",onDeviceReady,false);
+	function onDeviceReady(){
+		//	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+		/* document.getElementById("createFile").addEventListener("click", createFile);
+		document.getElementById("writeFile").addEventListener("click", writeFile);
+		document.getElementById("readFile").addEventListener("click", readFile);
+		document.getElementById("removeFile").addEventListener("click", removeFile); */
+		
+		if (document.getElementById("uploadFile")) {
+			document.getElementById("uploadFile").addEventListener("click", uploadFile);
+		}	
+		if (document.getElementById("cordova-plugin-sketch-open")) {
+			document.getElementById("cordova-plugin-sketch-open").addEventListener("click", getSketch, false);
+		}
+	}
+
+	function getSketch(){
+	console.log('test');
+  var image = document.getElementById('myImage');
+  navigator.sketch.getSketch(onSuccess, onFail, {
+    destinationType: navigator.sketch.DestinationType.DATA_URL,
+    encodingType: navigator.sketch.EncodingType.JPEG,
+    inputType : navigator.sketch.InputType.FILE_URI,
+    inputData : image.src
+  });
+}
+
+function onSuccess(imageData) {
+	console.log('plugin messag1e: ' + message);
+  if(imageData == null) { return; }
+  setTimeout(function() {
+  // do your thing here!
+    var image = document.getElementById('myImage');
+    if(imageData.indexOf("data:image") >= 0 ) {
+      image.src = imageData;
+    } else {
+      image.src = "data:image/png;base64," + imageData;
+    }
+  }, 0);
+}
+
+function onFail(message) {
+    setTimeout(function() {
+      console.log('plugin message: ' + message);
+    }, 0);
+}
+	
+	function uploadFile() {
+	   var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/myFile.jpg";
+	   var uri = encodeURI("https://aesthetics-tool.000webhostapp.com/drawings/upload.php");
+	   var options = new FileUploadOptions();
+		
+	   options.fileKey = "file";
+	   options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
+
+	   options.mimeType = "image/jpg";
+
+	   var headers = {'headerParam':'headerValue'};
+	   options.headers = headers;
+
+	   var ft = new FileTransfer();
+
+	   ft.upload(fileURL, uri, onSuccess, onError, options);
+
+	   function onSuccess(r) {
+		  console.log("Upload complete");
+	   }
+
+	   function onError(error) {
+		  console.log("Upload error");
+	   }
+		
+	}
+		
+	function createFile() {
+	   var type = window.TEMPORARY;
+	   var size = 5*1024*1024;
+
+	   window.requestFileSystem(type, size, successCallback, errorCallback)
+
+	   function successCallback(fs) {
+		  fs.root.getFile('zcabmfm.txt', {create: true, exclusive: true}, function(fileEntry) {
+			 alert('File creation successfull!')
+		  }, errorCallback);
+	   }
+
+	   function errorCallback(error) {
+		  alert("ERROR: " + error.code)
+	   }
+		
+	}
+
+function writeFile() {
+   var type = window.TEMPORARY;
+   var size = 5*1024*1024;
+
+   window.requestFileSystem(type, size, successCallback, errorCallback)
+
+   function successCallback(fs) {
+
+      fs.root.getFile('zcabmfm.txt', {create: true}, function(fileEntry) {
+
+         fileEntry.createWriter(function(fileWriter) {
+            fileWriter.onwriteend = function(e) {
+               alert('Write completed.');
+            };
+
+            fileWriter.onerror = function(e) {
+               alert('Write failed: ' + e.toString());
+            };
+
+            var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+            fileWriter.write(blob);
+         }, errorCallback);
+
+      }, errorCallback);
+
+   }
+
+   function errorCallback(error) {
+      alert("ERROR: " + error.code)
+   }
+	
+}
+
+function readFile() {
+   var type = window.TEMPORARY;
+   var size = 5*1024*1024;
+
+   window.requestFileSystem(type, size, successCallback, errorCallback)
+
+   function successCallback(fs) {
+
+      fs.root.getFile('zcabmfm.txt', {}, function(fileEntry) {
+
+         fileEntry.file(function(file) {
+            var reader = new FileReader();
+
+            reader.onloadend = function(e) {
+               var txtArea = document.getElementById('textarea');
+               txtArea.value = this.result;
+            };
+
+            reader.readAsText(file);
+
+         }, errorCallback);
+
+      }, errorCallback);
+   }
+
+   function errorCallback(error) {
+      alert("ERROR: " + error.code)
+   }
+	
+}	
+
+function removeFile() {
+   var type = window.TEMPORARY;
+   var size = 5*1024*1024;
+
+   window.requestFileSystem(type, size, successCallback, errorCallback)
+
+   function successCallback(fs) {
+      fs.root.getFile('zcabmfm.txt', {create: false}, function(fileEntry) {
+
+         fileEntry.remove(function() {
+            alert('File removed.');
+         }, errorCallback);
+
+      }, errorCallback);
+   }
+
+   function errorCallback(error) {
+      alert("ERROR: " + error.code)
+   }
+	
+}
+
     //Notifications
     $('.show-bottom-notification-2').click(function(){
         $('.top-notification, .bottom-notification, .timeout-notification').slideUp(200);
@@ -54,7 +235,7 @@ $( document ).ready(function() {
         $div.attr('class', 'not-active');
         var snapper = new Snap({
             element: document.getElementById('content'),
-            elementMirror: document.getElementById('header-fixed'),
+            elementMirror: document.getElementById('navigation-header'),
             elementMirror2: document.getElementById('footer-fixed'),
             disable: 'right',
             tapToClose: true,
@@ -665,3 +846,33 @@ $( document ).ready(function() {
     }
 }).call(this, window, document);
 }(jQuery));// JavaScript Document
+
+function getImageLocation(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+angular.module('croppy', [])
+  .directive('croppedImage', function () {
+      return {
+          restrict: "E",
+          replace: true,
+          template: "<div class='center-cropped'></div>",
+          link: function(scope, element, attrs) {
+              var width = attrs.width;
+              var height = attrs.height;
+              element.css('width', width + "px");
+              element.css('height', height + "px");
+              element.css('backgroundPosition', 'center center');
+              element.css('backgroundRepeat', 'no-repeat');
+              element.css('backgroundImage', "url('" + attrs.src + "')");
+          }
+      }
+  });
