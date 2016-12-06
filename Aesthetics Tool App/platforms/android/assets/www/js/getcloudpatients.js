@@ -4,7 +4,7 @@ function myFunction(arr) {
 	for(i = 0; i<arr.length; i++) {
 		out += 
 		'<div class="activity-item container">' + 
-			'<div ng-app="croppy"><img src="' + arr[i].image + '" alt="thumbnail"></div>' + 
+			'<div ng-app="croppy"><img src="' + arr[i].image + '" alt="thumbnail"></img></div>' + 
 			'<h2>' + arr[i].name + '</h2>' + 
 			'<em>' + arr[i].date + '</em>' + 
 			'<a href="#" class="activity-item-toggle"><i class="fa fa-plus"></i></a>' + 
@@ -14,7 +14,12 @@ function myFunction(arr) {
 						'<td><a href="viewcloudimage.html?imageLocation=' + arr[i].image + '"><i class="fa fa-picture-o"></i> View image</a></td>' + 
 						'<td><a href="#" onclick="downloadFile(';
 						out +=
-						"'" + arr[i].image + "'" + ')"><i class="fa fa-download"></i> Download</a></td>' + 
+						"'" + arr[i].name + "', ";
+						out += 
+						"'" + arr[i].date + "', ";
+						out += 
+						"'" + arr[i].image + "'" + 
+						')"><i class="fa fa-download"></i> Download</a></td>' + 
 					'</tr>' + 
 					'<tr>' + 
 						'<td><a href="drawingsscores.html"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
@@ -28,10 +33,9 @@ function myFunction(arr) {
 	document.getElementById("id01").innerHTML = out;
 } 
 // Use toast for download notifications
-function downloadFile(imageLink) {
+function downloadFile(nameDB, imageDB, imageLink) {
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(imageLink);
-	alert(uri);
 	imageName = imageLink.split('/');
 	var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/" + imageName.pop();
 	
@@ -39,6 +43,7 @@ function downloadFile(imageLink) {
 		uri, fileURL, function(entry) {
 			alert("Downloaded");
 			console.log("Download complete");
+			insert(nameDB, imageDB, imageLink);
 		},
 		
 		function(error) {
@@ -54,6 +59,23 @@ function downloadFile(imageLink) {
 	);
 }
 
+function insert(nameDB, imageDB, imageLink) {
+	var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+	var name=nameDB;
+	var date=imageDB;
+	var image=imageLink;
+	console.log(name + " " + date +" "+ image);
+	myDB.transaction(function(transaction) {
+		var executeQuery = "INSERT INTO phonegap_pro (name, date, image) VALUES (?,?,?)";             
+		transaction.executeSql(executeQuery, [name,date,image]
+			, function(tx, result) {
+				 alert('Inserted');
+			},
+			function(error){
+				 alert('Error occurred'); 
+			});
+	});
+}
 
 
 

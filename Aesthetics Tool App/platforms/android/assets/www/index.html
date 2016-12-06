@@ -24,7 +24,7 @@
 	
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/getlocalpatients.js"></script>
+	<script type="text/javascript" src="js/navdrawer.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	
 </head>
@@ -62,7 +62,7 @@
 				<em>About</em>
 				<i class="fa fa-circle"></i>
 			</a>
-			<a class="navigation-drawer-option show-bottom-notification-2 timer-notification" href="#">
+			<a onclick="sync()" class="navigation-drawer-option show-bottom-notification-2 timer-notification" href="#">
 				<i class="fa fa-refresh"></i>
 				<em>Sync</em>
 			</a>
@@ -74,8 +74,8 @@
 					
 		<div id="content" class="snap-content">
 			<div class="content">
-			<div class="header-separation"></div>
-			<!--Page content goes here, fixed elements go above the all elements class-->
+				<div class="header-separation"></div>
+				<!--Page content goes here, fixed elements go above the all elements class-->
 
 				<div class="title-banner container half-bottom">
 					<i class="fa fa-folder"></i>
@@ -88,17 +88,11 @@
 						Images downloaded from the cloud are shown here.
 					</p>
 				</div>
-					
+
 				<div id="id01"></div>
-				<script src="js/localpatientlist.js"></script>	
-				
-				<!-- <button id="createFile">CREATE2 FILE</button>
-				<button id="writeFile">WRITE FILE</button>
-				<button id="readFile">READ FILE</button>
-				<button id="removeFile">DELETE FILE</button>
-				<textarea id="textarea"></textarea> -->
-				
-				<button id="uploadFile">UPLOAD</button>
+				<!-- <div onclick="test()">test</div> -->
+				<!-- <script type="text/javascript" src="js/localpatientlist.js"></script> -->
+				<!-- <button id="uploadFile">UPLOAD</button> -->
 				
 				<div class="footer">
 					<p class="center-text">Back to top</p>

@@ -77,7 +77,7 @@ body {
     background-color:#fff;
 }
 .palette-case {
-    width:300px;
+    width:350px;
     margin:auto;
     text-align:center;
 }
@@ -91,12 +91,9 @@ body {
     width:36px;
 }
 .blue{
-    background-color:#22c;
+    background-color:#3137FD;
 }
 .green{
-    background-color:#2c2;
-}
-.black{
-    background-color:#000;
-    border:2px dashed #fff;
+    background-color:#00FF00;
+	border:2px dashed #fff;
 }

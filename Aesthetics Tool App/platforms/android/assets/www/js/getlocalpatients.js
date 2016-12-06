@@ -1,4 +1,5 @@
-function myFunction(arr) {
+ function myFunction(arr) {
+	alert("2");
 	var i;
 	var out = '';
 	for(i = 0; i<arr.length; i++) {
@@ -29,3 +30,5 @@ function myFunction(arr) {
 	}
 	document.getElementById("id01").innerHTML = out;
 }
+
+//arr[i].image

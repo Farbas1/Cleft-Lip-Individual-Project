@@ -25,8 +25,7 @@
 	
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
-	<script type="text/javascript" src="js/drawing.js"></script>
+	<script type="text/javascript" src="js/createdrawing.js"></script>
 	
 </head>
 <body> 
@@ -45,10 +44,7 @@
 			<div class="navbtn" onclick="newCanvas()">Redraw</div>
 		</div>	
 		<div class="palette-box">
-			<a class="navbtn" href="drawingsscores.html">Done</a>
-		</div>
-		<div class="palette-box">
-			<div class="navbtn" onclick="data()">data</div>
+			<a class="navbtn" href="drawingsscores.html" onclick="saveDrawing()">Done</a>
 		</div>
 		<div class="palette-box">
 			<div class="palette blue" onclick="selectColor(this)"></div>
@@ -56,13 +52,8 @@
 		<div class="palette-box">
 			<div class="palette green" onclick="selectColor(this)"></div>
 		</div>
-		<div class="palette-box">
-			<div class="palette black" onclick="selectColor(this)"></div>
-		</div>
-		<p></p>
 	</div>
 </div>
-		
 
 </body>
 </html>

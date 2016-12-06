@@ -1,53 +1,65 @@
+var patients = [];
 $(document).ready(function() {
 
 	var myDB;
-	//Open Database Connection
+	
 	document.addEventListener("deviceready",onDeviceReady,false);
 	function onDeviceReady(){
-		//	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
-		/* document.getElementById("createFile").addEventListener("click", createFile);
-		document.getElementById("writeFile").addEventListener("click", writeFile);
-		document.getElementById("readFile").addEventListener("click", readFile);
-		document.getElementById("removeFile").addEventListener("click", removeFile); */
-		
-		if (document.getElementById("uploadFile")) {
-			document.getElementById("uploadFile").addEventListener("click", uploadFile);
-		}	
-		if (document.getElementById("cordova-plugin-sketch-open")) {
-			document.getElementById("cordova-plugin-sketch-open").addEventListener("click", getSketch, false);
-		}
+		myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+		myDB.transaction(function(transaction) {
+			transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (name text, date text, image text)', []);
+		});
+		showTable();
 	}
 
-	function getSketch(){
-	console.log('test');
-  var image = document.getElementById('myImage');
-  navigator.sketch.getSketch(onSuccess, onFail, {
-    destinationType: navigator.sketch.DestinationType.DATA_URL,
-    encodingType: navigator.sketch.EncodingType.JPEG,
-    inputType : navigator.sketch.InputType.FILE_URI,
-    inputData : image.src
-  });
-}
+	function showTable() {
+		myDB.transaction(function(transaction) {
+		transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
+			var len = results.rows.length, i;
+			for (i = 0; i < len; i++) {
+				patients[i] = {"name":results.rows.item(i).name, "date":results.rows.item(i).date, "image":results.rows.item(i).image};
+			}
+			myFunction(patients);
+		}, null);
+		});
+	}
+	
+	function removePatient(name){
+	  alert(name);
+	  myDB.transaction(function(transaction) {
+		var executeQuery = "DELETE FROM phonegap_pro where name=?";
+		transaction.executeSql(executeQuery, [name],
+		  //On Success
+		  function(tx, result) {alert('Deleted successfully');},
+		  //On Error
+		  function(error){alert('Something went Wrong');});
+	  });
+	}
 
-function onSuccess(imageData) {
-	console.log('plugin messag1e: ' + message);
-  if(imageData == null) { return; }
-  setTimeout(function() {
-  // do your thing here!
-    var image = document.getElementById('myImage');
-    if(imageData.indexOf("data:image") >= 0 ) {
-      image.src = imageData;
-    } else {
-      image.src = "data:image/png;base64," + imageData;
-    }
-  }, 0);
-}
+	$("#update").click(function(){
+	  var name=$("#name").text();
+	  var date=$("#date").val();
+	  var image=$("#image").val()
+	  myDB.transaction(function(transaction) {
+		var executeQuery = "UPDATE phonegap_pro SET date=?, image=? WHERE name=?";
+		transaction.executeSql(executeQuery, [date,image,name],
+		  //On Success
+		  function(tx, result) {alert('Updated successfully');},
+		  //On Error
+		  function(error){alert('Something went Wrong');});
+	  });
+	});
 
-function onFail(message) {
-    setTimeout(function() {
-      console.log('plugin message: ' + message);
-    }, 0);
-}
+	function getUrlVars() {
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		for (var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		return vars;
+	}
 	
 	function uploadFile() {
 	   var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/myFile.jpg";
@@ -75,130 +87,14 @@ function onFail(message) {
 	   }
 		
 	}
-		
-	function createFile() {
-	   var type = window.TEMPORARY;
-	   var size = 5*1024*1024;
-
-	   window.requestFileSystem(type, size, successCallback, errorCallback)
-
-	   function successCallback(fs) {
-		  fs.root.getFile('zcabmfm.txt', {create: true, exclusive: true}, function(fileEntry) {
-			 alert('File creation successfull!')
-		  }, errorCallback);
-	   }
-
-	   function errorCallback(error) {
-		  alert("ERROR: " + error.code)
-	   }
-		
-	}
-
-function writeFile() {
-   var type = window.TEMPORARY;
-   var size = 5*1024*1024;
-
-   window.requestFileSystem(type, size, successCallback, errorCallback)
-
-   function successCallback(fs) {
-
-      fs.root.getFile('zcabmfm.txt', {create: true}, function(fileEntry) {
-
-         fileEntry.createWriter(function(fileWriter) {
-            fileWriter.onwriteend = function(e) {
-               alert('Write completed.');
-            };
-
-            fileWriter.onerror = function(e) {
-               alert('Write failed: ' + e.toString());
-            };
-
-            var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
-            fileWriter.write(blob);
-         }, errorCallback);
-
-      }, errorCallback);
-
-   }
-
-   function errorCallback(error) {
-      alert("ERROR: " + error.code)
-   }
-	
-}
-
-function readFile() {
-   var type = window.TEMPORARY;
-   var size = 5*1024*1024;
-
-   window.requestFileSystem(type, size, successCallback, errorCallback)
-
-   function successCallback(fs) {
-
-      fs.root.getFile('zcabmfm.txt', {}, function(fileEntry) {
-
-         fileEntry.file(function(file) {
-            var reader = new FileReader();
-
-            reader.onloadend = function(e) {
-               var txtArea = document.getElementById('textarea');
-               txtArea.value = this.result;
-            };
-
-            reader.readAsText(file);
-
-         }, errorCallback);
-
-      }, errorCallback);
-   }
-
-   function errorCallback(error) {
-      alert("ERROR: " + error.code)
-   }
-	
-}	
-
-function removeFile() {
-   var type = window.TEMPORARY;
-   var size = 5*1024*1024;
-
-   window.requestFileSystem(type, size, successCallback, errorCallback)
-
-   function successCallback(fs) {
-      fs.root.getFile('zcabmfm.txt', {create: false}, function(fileEntry) {
-
-         fileEntry.remove(function() {
-            alert('File removed.');
-         }, errorCallback);
-
-      }, errorCallback);
-   }
-
-   function errorCallback(error) {
-      alert("ERROR: " + error.code)
-   }
-	
-}
-
-    //Notifications
-    $('.show-bottom-notification-2').click(function(){
-        $('.top-notification, .bottom-notification, .timeout-notification').slideUp(200);
-        $('.bottom-notification-2').slideDown(200);
-        return false;
-    });    
-	
-    $('.timer-notification').click(function(){
-        var notification_timer;
-        notification_timer = setTimeout(function(){ $('.timeout-notification').slideUp(250); },2000);
-    });
 	
     //Activity Item Toggle
     $('.activity-item').click(function(){
-       $(this).find('.activity-item-detail').slideToggle(200); 
+		$(this).find('.activity-item-detail').slideToggle(200);
     });
 
     //Make container fullscreen         
-    function create_paddings(){
+    function create_paddings() {
         var no_padding = $(window).width();
         function mobile_paddings(){
             $('.content').css('padding-left', '20px');   
@@ -222,630 +118,63 @@ function removeFile() {
         }
     }
 
-    $(window).resize(function() {  
+    $(window).resize(function() { 
         create_paddings();
     });
     create_paddings();
     
-    if($('body').hasClass('left-sidebar')){   left_sidebar();   }
-    
-    function left_sidebar(){
-        var $div = $('<div />').appendTo('body');
-        $div.attr('id', 'footer-fixed');
-        $div.attr('class', 'not-active');
-        var snapper = new Snap({
-            element: document.getElementById('content'),
-            elementMirror: document.getElementById('navigation-header'),
-            elementMirror2: document.getElementById('footer-fixed'),
-            disable: 'right',
-            tapToClose: true,
-            touchToDrag: true,
-            maxPosition: 266,
-            minPosition: -266
-        });  
-        $('.close-sidebar').click(function(){snapper.close();});
-        $('.open-left-sidebar').click(function() {
-            if( snapper.state().state=="left" ){
-                snapper.close();
-            } else {
-                snapper.open('left');
-            }
-            return false;
-        });	
-        snapper.on('open', function(){$('.back-to-top-badge').removeClass('back-to-top-badge-visible');});
-    };  
-	
 });
+	function removePatient(name){
+	  alert(name);
+	  myDB.transaction(function(transaction) {
+		var executeQuery = "DELETE FROM phonegap_pro where name=?";
+		transaction.executeSql(executeQuery, [name],
+		  //On Success
+		  function(tx, result) {alert('Deleted successfully');},
+		  //On Error
+		  function(error){alert('Something went Wrong');});
+	  });
+	}
+ function myFunction(arr) {
+	var i;
+	var out = '';
+	for(i = 0; i<arr.length; i++) {
+		out += 
+		'<div class="activity-item container">' + 
+			'<div ng-app="croppy"><img src="' + arr[i].image + '" width="70" height="70" alt="thumbnail"></div>' + 
+			'<h2>' + arr[i].name + '</h2>' + 
+			'<em>' + arr[i].date + '</em>' + 
+			'<a href="#" onclick="test()" class="activity-item-toggle"><i class="fa fa-plus"></i></a>' + 
+			'<div class="activity-item-detail">' + 
+				'<table style="width:100%">' + 
+					'<tr>' + 
+						'<td><a href="viewlocalimage.html?imageLocation=' + arr[i].image + '"><i class="fa fa-picture-o"></i> View image</a></td>' + 
+						'<td><a href="#" onclick="sync()" class="show-bottom-notification-2 timer-notification"><i class="fa fa-refresh"></i> Sync</a></td>' + 
+					'</tr>' + 
+					'<tr>' + 
+						'<td><a href="createdrawing.html?imageLocation=' + arr[i].image + '"><i class="fa fa-pencil"></i> Create drawing</a></td>' + 
+						'<td><a href="#" onclick="removePatient(\'' + arr[i].name + '\')"><i class="fa fa-trash"></i> Delete</a></td>' + 
+					'</tr>' +
+					'<tr>' + 
+						'<td><a href="drawingsscores.html"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
+						'<td><a href="#"><i class="fa fa-times"></i> Close</a></td>' + 
+					'</tr>' + 
+				'</table>' + 
+			'</div>' + 
+		'</div>' + 
+		'<div class="border"></div>';
+	}
+	document.getElementById("id01").innerHTML = out;
+}
 
-(function($){ //Navigation drawer
-/*
- * Snap.js
- *
- * Copyright 2013, Jacob Kelley - http://jakiestfu.com/
- * Released under the MIT Licence
- * http://opensource.org/licenses/MIT
- *
- * Github:  http://github.com/jakiestfu/Snap.js/
- * Version: 1.9.3 (with elementMirror for fixed navigation bars)
- */
-/*jslint browser: true*/
-/*global define, module, ender*/
-(function(win, doc) {
-    'use strict';
-    var Snap = Snap || function(userOpts) {
-        var settings = {
-            element: null,
-            elementMirror: null,
-			elementMirror2: null,
-            dragger: null,
-            disable: 'none',
-            addBodyClasses: true,
-            hyperextensible: true,
-            resistance: 0.5,
-            flickThreshold: 50,
-            transitionSpeed: 0.3,
-            easing: 'ease',
-            maxPosition: 266,
-            minPosition: -266,
-            tapToClose: true,
-            touchToDrag: true,
-            slideIntent: 40, // degrees
-            minDragDistance: 5
-        },
-        cache = {
-            simpleStates: {
-                opening: null,
-                towards: null,
-                hyperExtending: null,
-                halfway: null,
-                flick: null,
-                translation: {
-                    absolute: 0,
-                    relative: 0,
-                    sinceDirectionChange: 0,
-                    percentage: 0
-                }
-            }
-        },
-        eventList = {},
-        utils = {
-            hasTouch: ('ontouchstart' in doc.documentElement || win.navigator.msPointerEnabled),
-            eventType: function(action) {
-                var eventTypes = {
-                        down: (utils.hasTouch ? 'touchstart' : 'mousedown'),
-                        move: (utils.hasTouch ? 'touchmove' : 'mousemove'),
-                        up: (utils.hasTouch ? 'touchend' : 'mouseup'),
-                        out: (utils.hasTouch ? 'touchcancel' : 'mouseout')
-                    };
-                return eventTypes[action];
-            },
-            page: function(t, e){
-                return (utils.hasTouch && e.touches.length && e.touches[0]) ? e.touches[0]['page'+t] : e['page'+t];
-            },
-            klass: {
-                has: function(el, name){
-                    return (el.className).indexOf(name) !== -1;
-                },
-                add: function(el, name){
-                    if(!utils.klass.has(el, name) && settings.addBodyClasses){
-                        el.className += " "+name;
-                    }
-                },
-                remove: function(el, name){
-                    if(settings.addBodyClasses){
-                        el.className = (el.className).replace(name, "").replace(/^\s+|\s+$/g, '');
-                    }
-                }
-            },
-            dispatchEvent: function(type) {
-                if (typeof eventList[type] === 'function') {
-                    return eventList[type].call();
-                }
-            },
-            vendor: function(){
-                var tmp = doc.createElement("div"),
-                    prefixes = 'webkit Moz O ms'.split(' '),
-                    i;
-                for (i in prefixes) {
-                    if (typeof tmp.style[prefixes[i] + 'Transition'] !== 'undefined') {
-                        return prefixes[i];
-                    }
-                }
-            },
-            transitionCallback: function(){
-                return (cache.vendor==='Moz' || cache.vendor==='ms') ? 'transitionend' : cache.vendor+'TransitionEnd';
-            },
-            canTransform: function(){settings.element
-                return typeof settings.element.style[cache.vendor+'Transform'] !== 'undefined';
-            },
-            deepExtend: function(destination, source) {
-                var property;
-                for (property in source) {
-                    if (source[property] && source[property].constructor && source[property].constructor === Object) {
-                        destination[property] = destination[property] || {};
-                        utils.deepExtend(destination[property], source[property]);
-                    } else {
-                        destination[property] = source[property];
-                    }
-                }
-                return destination;
-            },
-            angleOfDrag: function(x, y) {
-                var degrees, theta;
-                // Calc Theta
-                theta = Math.atan2(-(cache.startDragY - y), (cache.startDragX - x));
-                if (theta < 0) {
-                    theta += 2 * Math.PI;
-                }
-                // Calc Degrees
-                degrees = Math.floor(theta * (180 / Math.PI) - 180);
-                if (degrees < 0 && degrees > -180) {
-                    degrees = 360 - Math.abs(degrees);
-                }
-                return Math.abs(degrees);
-            },
-            events: {
-                addEvent: function addEvent(element, eventName, func) {
-                    if (element.addEventListener) {
-                        return element.addEventListener(eventName, func, false);
-                    } else if (element.attachEvent) {
-                        return element.attachEvent("on" + eventName, func);
-                    }
-                },
-                removeEvent: function addEvent(element, eventName, func) {
-                    if (element.addEventListener) {
-                        return element.removeEventListener(eventName, func, false);
-                    } else if (element.attachEvent) {
-                        return element.detachEvent("on" + eventName, func);
-                    }
-                },
-                prevent: function(e) {
-                    if (e.preventDefault) {
-                        e.preventDefault();
-                    } else {
-                        e.returnValue = false;
-                    }
-                }
-            },
-            parentUntil: function(el, attr) {
-                var isStr = typeof attr === 'string';
-                while (el.parentNode) {
-                    if (isStr && el.getAttribute && el.getAttribute(attr)){
-                        return el;
-                    } else if(!isStr && el === attr){
-                        return el;
-                    }
-                    el = el.parentNode;
-                }
-                return null;
-            }
-        },
-        action = {
-            translate: {
-                get: {
-                    matrix: function(index) {
+function test() {
+	$('.activity-item').find('.activity-item-detail').slideToggle(200);
+}
 
-                        if( !utils.canTransform() ){
-                            return parseInt(settings.element.style.left, 10);
-                        } else {
-                            var matrix = win.getComputedStyle(settings.element)[cache.vendor+'Transform'].match(/\((.*)\)/),
-                                ieOffset = 8;
-                            if (matrix) {
-                                matrix = matrix[1].split(',');
-                                if(matrix.length===16){
-                                    index+=ieOffset;
-                                }
-                                return parseInt(matrix[index], 10);
-                            }
-                            return 0;
-                        }
-                    }
-                },
-                easeCallback: function(){
-                    settings.element.style[cache.vendor+'Transition'] = '';
-                    settings.elementMirror.style[cache.vendor+'Transition'] = '';
-					settings.elementMirror2.style[cache.vendor+'Transition'] = '';
-                    cache.translation = action.translate.get.matrix(4);
-                    cache.easing = false;
-                    clearInterval(cache.animatingInterval);
-
-                    if(cache.easingTo===0){
-                        utils.klass.remove(doc.body, 'snapjs-right');
-                        utils.klass.remove(doc.body, 'snapjs-left');
-                    }
-
-                    utils.dispatchEvent('animated');
-                    utils.events.removeEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
-                },
-                easeTo: function(n) {
-
-                    if( !utils.canTransform() ){
-                        cache.translation = n;
-                        action.translate.x(n);
-                    } else {
-                        cache.easing = true;
-                        cache.easingTo = n;
-
-                        settings.element.style[cache.vendor+'Transition'] = 'all ' + settings.transitionSpeed + 's ' + settings.easing;
-                        settings.elementMirror.style[cache.vendor+'Transition'] = 'all ' + settings.transitionSpeed + 's ' + settings.easing;
-						settings.elementMirror2.style[cache.vendor+'Transition'] = 'all ' + settings.transitionSpeed + 's ' + settings.easing;
-
-                        cache.animatingInterval = setInterval(function() {
-                            utils.dispatchEvent('animating');
-                        }, 1);
-                        
-                        utils.events.addEvent(settings.element, utils.transitionCallback(), action.translate.easeCallback);
-                        action.translate.x(n);
-                    }
-                    if(n===0){
-                           settings.element.style[cache.vendor+'Transform'] = '';
-                           settings.elementMirror.style[cache.vendor+'Transform'] = '';
-						   settings.elementMirror2.style[cache.vendor+'Transform'] = '';
-                       }
-                },
-                x: function(n) {
-                    if( (settings.disable==='left' && n>0) ||
-                        (settings.disable==='right' && n<0)
-                    ){ return; }
-                    
-                    if( !settings.hyperextensible ){
-                        if( n===settings.maxPosition || n>settings.maxPosition ){
-                            n=settings.maxPosition;
-                        } else if( n===settings.minPosition || n<settings.minPosition ){
-                            n=settings.minPosition;
-                        }
-                    }
-                    
-                    n = parseInt(n, 10);
-                    if(isNaN(n)){
-                        n = 0;
-                    }
-
-                    if( utils.canTransform() ){
-                        var theTranslate = 'translate3d(' + n + 'px, 0,0)';
-                        settings.element.style[cache.vendor+'Transform'] = theTranslate;
-                        settings.elementMirror.style[cache.vendor+'Transform'] = theTranslate;
-						settings.elementMirror2.style[cache.vendor+'Transform'] = theTranslate;
-                    } else {
-                        settings.element.style.width = (win.innerWidth || doc.documentElement.clientWidth)+'px';
-                        settings.elementMirror.style.width = (win.innerWidth || doc.documentElement.clientWidth)+'px';
-						settings.elementMirror2.style.width = (win.innerWidth || doc.documentElement.clientWidth)+'px';
-						
-                        settings.element.style.left = n+'px';
-                        settings.elementMirror.style.left = n+'px';
-						settings.elementMirror2.style.left = n+'px';
-                        settings.element.style.right = '';
-                        settings.elementMirror.style.right = '';
-						settings.elementMirror2.style.right = '';
-						
-                    }
-                }
-            },
-            drag: {
-                listen: function() {
-                    cache.translation = 0;
-                    cache.easing = false;
-                    utils.events.addEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
-                    utils.events.addEvent(settings.element, utils.eventType('move'), action.drag.dragging);
-                    utils.events.addEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
-                },
-                stopListening: function() {
-                    utils.events.removeEvent(settings.element, utils.eventType('down'), action.drag.startDrag);
-                    utils.events.removeEvent(settings.element, utils.eventType('move'), action.drag.dragging);
-                    utils.events.removeEvent(settings.element, utils.eventType('up'), action.drag.endDrag);
-                },
-                startDrag: function(e) {
-                    // No drag on ignored elements
-                    var target = e.target ? e.target : e.srcElement,
-                        ignoreParent = utils.parentUntil(target, 'data-snap-ignore');
-                    
-                    if (ignoreParent) {
-                        utils.dispatchEvent('ignore');
-                        return;
-                    }
-                    
-                    
-                    if(settings.dragger){
-                        var dragParent = utils.parentUntil(target, settings.dragger);
-                        
-                        // Only use dragger if we're in a closed state
-                        if( !dragParent && 
-                            (cache.translation !== settings.minPosition && 
-                            cache.translation !== settings.maxPosition
-                        )){
-                            return;
-                        }
-                    }
-                    
-                    utils.dispatchEvent('start');
-                    settings.element.style[cache.vendor+'Transition'] = '';
-                    settings.elementMirror.style[cache.vendor+'Transition'] = '';
-					settings.elementMirror2.style[cache.vendor+'Transition'] = '';
-                    cache.isDragging = true;
-                    cache.hasIntent = null;
-                    cache.intentChecked = false;
-                    cache.startDragX = utils.page('X', e);
-                    cache.startDragY = utils.page('Y', e);
-                    cache.dragWatchers = {
-                        current: 0,
-                        last: 0,
-                        hold: 0,
-                        state: ''
-                    };
-                    cache.simpleStates = {
-                        opening: null,
-                        towards: null,
-                        hyperExtending: null,
-                        halfway: null,
-                        flick: null,
-                        translation: {
-                            absolute: 0,
-                            relative: 0,
-                            sinceDirectionChange: 0,
-                            percentage: 0
-                        }
-                    };
-                },
-                dragging: function(e) {
-                    if (cache.isDragging && settings.touchToDrag) {
-
-                        var thePageX = utils.page('X', e),
-                            thePageY = utils.page('Y', e),
-                            translated = cache.translation,
-                            absoluteTranslation = action.translate.get.matrix(4),
-                            whileDragX = thePageX - cache.startDragX,
-                            openingLeft = absoluteTranslation > 0,
-                            translateTo = whileDragX,
-                            diff;
-
-                        // Shown no intent already
-                        if((cache.intentChecked && !cache.hasIntent)){
-                            return;
-                        }
-
-                        if(settings.addBodyClasses){
-                            if((absoluteTranslation)>0){
-                                utils.klass.add(doc.body, 'snapjs-left');
-                                utils.klass.remove(doc.body, 'snapjs-right');
-                            } else if((absoluteTranslation)<0){
-                                utils.klass.add(doc.body, 'snapjs-right');
-                                utils.klass.remove(doc.body, 'snapjs-left');
-                            }
-                        }
-
-                        if (cache.hasIntent === false || cache.hasIntent === null) {
-                            var deg = utils.angleOfDrag(thePageX, thePageY),
-                                inRightRange = (deg >= 0 && deg <= settings.slideIntent) || (deg <= 360 && deg > (360 - settings.slideIntent)),
-                                inLeftRange = (deg >= 180 && deg <= (180 + settings.slideIntent)) || (deg <= 180 && deg >= (180 - settings.slideIntent));
-                            if (!inLeftRange && !inRightRange) {
-                                cache.hasIntent = false;
-                            } else {
-                                cache.hasIntent = true;
-                            }
-                            cache.intentChecked = true;
-                        }
-
-                        if (
-                            (settings.minDragDistance>=Math.abs(thePageX-cache.startDragX)) || // Has user met minimum drag distance?
-                            (cache.hasIntent === false)
-                        ) {
-                            return;
-                        }
-
-                        utils.events.prevent(e);
-                        utils.dispatchEvent('drag');
-
-                        cache.dragWatchers.current = thePageX;
-                        // Determine which direction we are going
-                        if (cache.dragWatchers.last > thePageX) {
-                            if (cache.dragWatchers.state !== 'left') {
-                                cache.dragWatchers.state = 'left';
-                                cache.dragWatchers.hold = thePageX;
-                            }
-                            cache.dragWatchers.last = thePageX;
-                        } else if (cache.dragWatchers.last < thePageX) {
-                            if (cache.dragWatchers.state !== 'right') {
-                                cache.dragWatchers.state = 'right';
-                                cache.dragWatchers.hold = thePageX;
-                            }
-                            cache.dragWatchers.last = thePageX;
-                        }
-                        if (openingLeft) {
-                            // Pulling too far to the right
-                            if (settings.maxPosition < absoluteTranslation) {
-                                diff = (absoluteTranslation - settings.maxPosition) * settings.resistance;
-                                translateTo = whileDragX - diff;
-                            }
-                            cache.simpleStates = {
-                                opening: 'left',
-                                towards: cache.dragWatchers.state,
-                                hyperExtending: settings.maxPosition < absoluteTranslation,
-                                halfway: absoluteTranslation > (settings.maxPosition / 2),
-                                flick: Math.abs(cache.dragWatchers.current - cache.dragWatchers.hold) > settings.flickThreshold,
-                                translation: {
-                                    absolute: absoluteTranslation,
-                                    relative: whileDragX,
-                                    sinceDirectionChange: (cache.dragWatchers.current - cache.dragWatchers.hold),
-                                    percentage: (absoluteTranslation/settings.maxPosition)*100
-                                }
-                            };
-                        } else {
-                            // Pulling too far to the left
-                            if (settings.minPosition > absoluteTranslation) {
-                                diff = (absoluteTranslation - settings.minPosition) * settings.resistance;
-                                translateTo = whileDragX - diff;
-                            }
-                            cache.simpleStates = {
-                                opening: 'right',
-                                towards: cache.dragWatchers.state,
-                                hyperExtending: settings.minPosition > absoluteTranslation,
-                                halfway: absoluteTranslation < (settings.minPosition / 2),
-                                flick: Math.abs(cache.dragWatchers.current - cache.dragWatchers.hold) > settings.flickThreshold,
-                                translation: {
-                                    absolute: absoluteTranslation,
-                                    relative: whileDragX,
-                                    sinceDirectionChange: (cache.dragWatchers.current - cache.dragWatchers.hold),
-                                    percentage: (absoluteTranslation/settings.minPosition)*100
-                                }
-                            };
-                        }
-                        action.translate.x(translateTo + translated);
-                    }
-                },
-                endDrag: function(e) {
-                    if (cache.isDragging) {
-                        utils.dispatchEvent('end');
-                        var translated = action.translate.get.matrix(4);
-
-                        // Tap Close
-                        if (cache.dragWatchers.current === 0 && translated !== 0 && settings.tapToClose) {
-                            utils.dispatchEvent('close');
-                            utils.events.prevent(e);
-                            action.translate.easeTo(0);
-                            cache.isDragging = false;
-                            cache.startDragX = 0;
-                            return;
-                        }
-
-                        // Revealing Left
-                        if (cache.simpleStates.opening === 'left') {
-                            // Halfway, Flicking, or Too Far Out
-                            if ((cache.simpleStates.halfway || cache.simpleStates.hyperExtending || cache.simpleStates.flick)) {
-                                if (cache.simpleStates.flick && cache.simpleStates.towards === 'left') { // Flicking Closed
-                                    action.translate.easeTo(0);
-                                } else if (
-                                    (cache.simpleStates.flick && cache.simpleStates.towards === 'right') || // Flicking Open OR
-                                    (cache.simpleStates.halfway || cache.simpleStates.hyperExtending) // At least halfway open OR hyperextending
-                                ) {
-                                    action.translate.easeTo(settings.maxPosition); // Open Left
-                                }
-                            } else {
-                                action.translate.easeTo(0); // Close Left
-                            }
-                            // Revealing Right
-                        } else if (cache.simpleStates.opening === 'right') {
-                            // Halfway, Flicking, or Too Far Out
-                            if ((cache.simpleStates.halfway || cache.simpleStates.hyperExtending || cache.simpleStates.flick)) {
-                                if (cache.simpleStates.flick && cache.simpleStates.towards === 'right') { // Flicking Closed
-                                    action.translate.easeTo(0);
-                                } else if (
-                                    (cache.simpleStates.flick && cache.simpleStates.towards === 'left') || // Flicking Open OR
-                                    (cache.simpleStates.halfway || cache.simpleStates.hyperExtending) // At least halfway open OR hyperextending
-                                ) {
-                                    action.translate.easeTo(settings.minPosition); // Open Right
-                                }
-                            } else {
-                                action.translate.easeTo(0); // Close Right
-                            }
-                        }
-                        cache.isDragging = false;
-                        cache.startDragX = utils.page('X', e);
-                    }
-                }
-            }
-        },
-        init = function(opts) {
-            if (opts.element) {
-                utils.deepExtend(settings, opts);
-                cache.vendor = utils.vendor();
-                action.drag.listen();
-            }
-        };
-        /*
-         * Public
-         */
-        this.open = function(side) {
-            utils.dispatchEvent('open');
-            utils.klass.remove(doc.body, 'snapjs-expand-left');
-            utils.klass.remove(doc.body, 'snapjs-expand-right');
-
-            if (side === 'left') {
-                cache.simpleStates.opening = 'left';
-                cache.simpleStates.towards = 'right';
-                utils.klass.add(doc.body, 'snapjs-left');
-                utils.klass.remove(doc.body, 'snapjs-right');
-                action.translate.easeTo(settings.maxPosition);
-            } else if (side === 'right') {
-                cache.simpleStates.opening = 'right';
-                cache.simpleStates.towards = 'left';
-                utils.klass.remove(doc.body, 'snapjs-left');
-                utils.klass.add(doc.body, 'snapjs-right');
-                action.translate.easeTo(settings.minPosition);
-            }
-        };
-        this.close = function() {
-            utils.dispatchEvent('close');
-            action.translate.easeTo(0);
-        };
-        this.expand = function(side){
-            var to = win.innerWidth || doc.documentElement.clientWidth;
-
-            if(side==='left'){
-                utils.dispatchEvent('expandLeft');
-                utils.klass.add(doc.body, 'snapjs-expand-left');
-                utils.klass.remove(doc.body, 'snapjs-expand-right');
-            } else {
-                utils.dispatchEvent('expandRight');
-                utils.klass.add(doc.body, 'snapjs-expand-right');
-                utils.klass.remove(doc.body, 'snapjs-expand-left');
-                to *= -1;
-            }
-            action.translate.easeTo(to);
-        };
-
-        this.on = function(evt, fn) {
-            eventList[evt] = fn;
-            return this;
-        };
-        this.off = function(evt) {
-            if (eventList[evt]) {
-                eventList[evt] = false;
-            }
-        };
-
-        this.enable = function() {
-            utils.dispatchEvent('enable');
-            action.drag.listen();
-        };
-        this.disable = function() {
-            utils.dispatchEvent('disable');
-            action.drag.stopListening();
-        };
-
-        this.settings = function(opts){
-            utils.deepExtend(settings, opts);
-        };
-
-        this.state = function() {
-            var state,
-                fromLeft = action.translate.get.matrix(4);
-            if (fromLeft === settings.maxPosition) {
-                state = 'left';
-            } else if (fromLeft === settings.minPosition) {
-                state = 'right';
-            } else {
-                state = 'closed';
-            }
-            return {
-                state: state,
-                info: cache.simpleStates
-            };
-        };
-        init(userOpts);
-    };
-    if ((typeof module !== 'undefined') && module.exports) {
-        module.exports = Snap;
-    }
-    if (typeof ender === 'undefined') {
-        this.Snap = Snap;
-    }
-    if ((typeof define === "function") && define.amd) {
-        define("snap", [], function() {
-            return Snap;
-        });
-    }
-}).call(this, window, document);
-}(jQuery));// JavaScript Document
+function sync() {
+	$('.bottom-notification-2').slideDown(200);
+	var notification_timer = setTimeout(function(){ $('.timeout-notification').slideUp(250); },2000);
+}  
 
 function getImageLocation(name, url) {
     if (!url) {
@@ -860,19 +189,19 @@ function getImageLocation(name, url) {
 }
 
 angular.module('croppy', [])
-  .directive('croppedImage', function () {
-      return {
-          restrict: "E",
-          replace: true,
-          template: "<div class='center-cropped'></div>",
-          link: function(scope, element, attrs) {
-              var width = attrs.width;
-              var height = attrs.height;
-              element.css('width', width + "px");
-              element.css('height', height + "px");
-              element.css('backgroundPosition', 'center center');
-              element.css('backgroundRepeat', 'no-repeat');
-              element.css('backgroundImage', "url('" + attrs.src + "')");
-          }
-      }
-  });
+	.directive('croppedImage', function () {
+		return {
+			restrict: "E",
+			replace: true,
+			template: "<div class='center-cropped'></div>",
+			link: function(scope, element, attrs) {
+				var width = attrs.width;
+				var height = attrs.height;
+				element.css('width', width + "px");
+				element.css('height', height + "px");
+				element.css('backgroundPosition', 'center center');
+				element.css('backgroundRepeat', 'no-repeat');
+				element.css('backgroundImage', "url('" + attrs.src + "')");
+			}
+		}
+	});
