@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	var myDB;
 	document.addEventListener("deviceready",onDeviceReady,false);
-	function onDeviceReady(){
+	function onDeviceReady() {
 		myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});	
 	}
 	
@@ -89,6 +89,8 @@ function myFunction(arr) {
 						'<td><a href="viewcloudimage.html?imageLocation=' + arr[i].image + '"><i class="fa fa-picture-o"></i> View image</a></td>' + 
 						'<td><a href="#" onclick="downloadFile(';
 						out +=
+						"'" + arr[i].id + "', ";
+						out +=
 						"'" + arr[i].name + "', ";
 						out += 
 						"'" + arr[i].date + "', ";
@@ -108,7 +110,7 @@ function myFunction(arr) {
 	document.getElementById("id01").innerHTML = out;
 } 
 // Use toast for download notifications
-function downloadFile(nameDB, imageDB, imageLink) {
+function downloadFile(idDB, nameDB, imageDB, imageLink) {
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(imageLink);
 	imageName = imageLink.split('/');
@@ -118,7 +120,7 @@ function downloadFile(nameDB, imageDB, imageLink) {
 		uri, fileURL, function(entry) {
 			alert("Downloaded");
 			console.log("Download complete");
-			insert(nameDB, imageDB, fileURL);
+			insert(idDB, nameDB, imageDB, fileURL);
 		},
 		
 		function(error) {
@@ -134,17 +136,18 @@ function downloadFile(nameDB, imageDB, imageLink) {
 	);
 }
 
-function insert(nameDB, imageDB, fileURL) {
+function insert(idDB, nameDB, imageDB, fileURL) {
 	var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
-	var name=nameDB;
-	var date=imageDB;
-	var image=fileURL;
-	console.log(name + " " + date +" "+ image);
+	var id = idDB;
+	var name = nameDB;
+	var date = imageDB;
+	var image = fileURL;
+	console.log(id + " " + name + " " + date + " " + image);
 	myDB.transaction(function(transaction) {
-		var executeQuery = "INSERT INTO phonegap_pro (name, date, image) VALUES (?,?,?)";             
-		transaction.executeSql(executeQuery, [name,date,image]
+		var executeQuery = "INSERT INTO phonegap_pro (id, name, date, image) VALUES (?,?,?,?)";             
+		transaction.executeSql(executeQuery, [id, name, date, image]
 			, function(tx, result) {
-				 alert('Inserted');
+				 console.log('Inserted');
 			},
 			function(error){
 				 alert('Error occurred'); 

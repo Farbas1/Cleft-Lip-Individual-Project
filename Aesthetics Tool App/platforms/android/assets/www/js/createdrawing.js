@@ -1,14 +1,22 @@
-var ctx, color = "#00FF00";	
+
+
+$(document).ready(function() {
+});
+	var ctx, color = "#00FF00";	
+var myDB;
 
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
+	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+	myDB.transaction(function(transaction) {
+		transaction.executeSql('CREATE TABLE IF NOT EXISTS drawings (drawing text, scores text, parentid text, uploaded text)', []);
+	});
 	newCanvas();
 }
 
   
-  
 function selectColor(el){
-    for(var i=0;i<document.getElementsByClassName("palette").length;i++){
+    for (var i=0;i<document.getElementsByClassName("palette").length;i++){
         document.getElementsByClassName("palette")[i].style.borderColor = "#777";
         document.getElementsByClassName("palette")[i].style.borderStyle = "solid";
     }
@@ -23,14 +31,14 @@ function selectColor(el){
 var drawTouch = function() {
 	var start = function(e) {
 		ctx.beginPath();
-		x = e.changedTouches[0].pageX-3;
-		y = e.changedTouches[0].pageY-65;
+		x = e.changedTouches[0].pageX+33;
+		y = e.changedTouches[0].pageY-25;
 		ctx.moveTo(x,y);
 	};
 	var move = function(e) {
 		e.preventDefault();
-		x = e.changedTouches[0].pageX-3;
-		y = e.changedTouches[0].pageY-65;
+		x = e.changedTouches[0].pageX+33;
+		y = e.changedTouches[0].pageY-25;
 		ctx.lineTo(x,y);
 		ctx.stroke();
 	};
@@ -43,15 +51,15 @@ var drawPointer = function() {
 	var start = function(e) {
         e = e.originalEvent;
 		ctx.beginPath();
-		x = e.pageX-3;
-		y = e.pageY-65;
+		x = e.pageX+33;
+		y = e.pageY-25;
 		ctx.moveTo(x,y);
 	};
 	var move = function(e) {
 		e.preventDefault();
         e = e.originalEvent;
-		x = e.pageX-3;
-		y = e.pageY-65;
+		x = e.pageX+33;
+		y = e.pageY-25;
 		ctx.lineTo(x,y);
 		ctx.stroke();
     };
@@ -65,14 +73,14 @@ var drawMouse = function() {
 	var start = function(e) {
 		clicked = 1;
 		ctx.beginPath();
-		x = e.pageX-3;
-		y = e.pageY-65;
+		x = e.pageX+33;
+		y = e.pageY-25;
 		ctx.moveTo(x,y);
 	};
 	var move = function(e) {
 		if(clicked){
-			x = e.pageX-3;
-			y = e.pageY-65;
+			x = e.pageX+33;
+			y = e.pageY-25;
 			ctx.lineTo(x,y);
 			ctx.stroke();
 		}
@@ -90,8 +98,7 @@ var drawMouse = function() {
 function newCanvas() {
 	//define and resize canvas
 	var image = getImageLocation('imageLocation');
-	alert(image);
-    var canvas = '<canvas id="canvas" width="200" height="200" style="margin:3px;background: url(' + image + ');"></canvas>';
+    var canvas = '<canvas id="canvas" width="400" height="600" style="max-width:98%;margin:3px; background: url(' + image + '); background-repeat: no-repeat; background-size: contain;"></canvas>';
 	document.getElementById("contentDraw").innerHTML = canvas;
     
     // setup canvas
@@ -110,6 +117,7 @@ function saveDrawing() {
 	var fileTransfer = new FileTransfer();
 	var uri = encodeURI(dataUrl);
 	var imageName = getImageLocation('imageLocation');
+	var imageID = getImageLocation('imageID');
 	drawingName = imageName.split('/');
 	var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/" + drawingName.pop();
 	var timeStamp = new Date();
@@ -119,6 +127,8 @@ function saveDrawing() {
 			alert("Saved");
 			console.log("Save complete");
 			//Generate scores function goes here
+			var score = "90%";
+			insert(fileURL, score, imageID, "0");
 		},
 		
 		function(error) {
@@ -134,6 +144,22 @@ function saveDrawing() {
 	);	
 }
 
+function insert(drawing, scores, parentid, uploaded) {
+	var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+	console.log(drawing + " " + scores + " " + parentid + " " + uploaded);
+	myDB.transaction(function(transaction) {
+		alert("1");
+		var executeQuery = "INSERT INTO drawings (drawing, scores, parentid, uploaded) VALUES (?,?,?,?)";             
+		transaction.executeSql(executeQuery, [drawing, scores, parentid, uploaded]
+			, function(tx, result) {
+				alert('Inserted');
+			},
+			function(error){
+				alert('Error occurred'); 
+			});
+	});
+}
+
 function getImageLocation(name, url) {
     if (!url) {
       url = window.location.href;
@@ -145,3 +171,4 @@ function getImageLocation(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
