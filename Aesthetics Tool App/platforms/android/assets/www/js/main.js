@@ -1,118 +1,73 @@
 var patients = [];
 var myDB;
 	
-	document.addEventListener("deviceready",onDeviceReady,false);
-	function onDeviceReady(){
-		myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
-		myDB.transaction(function(transaction) {
-			transaction.executeSql('CREATE TABLE IF NOT EXISTS phonegap_pro (id text, name text, date text, image text)', []);
-		});
-		    //Make container fullscreen         
-    function create_paddings() {
-        var no_padding = $(window).width();
-        function mobile_paddings(){
-            $('.content').css('padding-left', '20px');   
-            $('.content').css('padding-right', '20px');   
-            $('.container-fullscreen, .image-fullscreen').css('margin-left', '-21px');
-            $('.container-fullscreen, .image-fullscreen').css('width', no_padding +2);    
-        }
-        
-        function tablet_paddings(){
-            $('.content').css('padding-left', '50px');   
-            $('.content').css('padding-right', '50px');  
-            $('.container-fullscreen, .image-fullscreen').css('margin-left', '-51px');
-            $('.container-fullscreen, .image-fullscreen').css('width', no_padding +2);              
-        }
-        
-        if($(window).width() < 766){
-            mobile_paddings()
-        }        
-        if($(window).width() > 766){
-            tablet_paddings()
-        }
-    }
-
-    $(window).resize(function() { 
-        create_paddings();
-    });
-    create_paddings();
-		showTable();
-	}
-
-	function showTable() {
-		myDB.transaction(function(transaction) {
-		transaction.executeSql('SELECT * FROM phonegap_pro', [], function (tx, results) {
-			var len = results.rows.length, i;
-			for (i = 0; i < len; i++) {
-				patients[i] = {"id":results.rows.item(i).id, "name":results.rows.item(i).name, "date":results.rows.item(i).date, "image":results.rows.item(i).image};
-			}
-			displayList(patients);
-		}, null);
-		});
-	}
-	
-	function removePatient(id) {
-	  myDB.transaction(function(transaction) {
-		var executeQuery = "DELETE FROM phonegap_pro where id=?";
-		transaction.executeSql(executeQuery, [id],
-		  //On Success
-		  function(tx, result) {alert('Deleted successfully');},
-		  //On Error
-		  function(error){alert('Something went Wrong');});
-	  });
-	}
-
-	$("#update").click(function() {
-	  var name=$("#name").text();
-	  var date=$("#date").val();
-	  var image=$("#image").val()
-	  myDB.transaction(function(transaction) {
-		var executeQuery = "UPDATE phonegap_pro SET date=?, image=? WHERE name=?";
-		transaction.executeSql(executeQuery, [date,image,name],
-		  //On Success
-		  function(tx, result) {alert('Updated successfully');},
-		  //On Error
-		  function(error){alert('Something went Wrong');});
-	  });
+document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady() {
+	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+	myDB.transaction(function(transaction) {
+		transaction.executeSql('CREATE TABLE IF NOT EXISTS patients_local (id text, name text, date text, image text)', []);
 	});
-
-	function getUrlVars() {
-		var vars = [], hash;
-		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-		for (var i = 0; i < hashes.length; i++) {
-			hash = hashes[i].split('=');
-			vars.push(hash[0]);
-			vars[hash[0]] = hash[1];
-		}
-		return vars;
-	}
+	myDB.transaction(function(transaction) {
+		transaction.executeSql('CREATE TABLE IF NOT EXISTS drawings_local (drawing text, score text, pid text, uploaded text)', []);
+	});
 	
-	function uploadFile() {
-	   var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/myFile.png";
-	   var uri = encodeURI("https://aesthetics-tool.000webhostapp.com/drawings/upload.php");
-	   var options = new FileUploadOptions();
+	//Make container fullscreen         
+	function create_paddings() {
+		var no_padding = $(window).width();
+		function mobile_paddings(){
+			$('.content').css('padding-left', '20px');   
+			$('.content').css('padding-right', '20px');   
+			$('.container-fullscreen, .image-fullscreen').css('margin-left', '-21px');
+			$('.container-fullscreen, .image-fullscreen').css('width', no_padding +2);    
+		}
 		
-	   options.fileKey = "file";
-	   options.fileName = fileURL.substr(fileURL.lastIndexOf('/')+1);
-
-	   options.mimeType = "image/png";
-
-	   var headers = {'headerParam':'headerValue'};
-	   options.headers = headers;
-
-	   var ft = new FileTransfer();
-
-	   ft.upload(fileURL, uri, onSuccess, onError, options);
-
-	   function onSuccess(r) {
-		  console.log("Upload complete");
-	   }
-
-	   function onError(error) {
-		  console.log("Upload error");
-	   }
+		function tablet_paddings(){
+			$('.content').css('padding-left', '50px');   
+			$('.content').css('padding-right', '50px');  
+			$('.container-fullscreen, .image-fullscreen').css('margin-left', '-51px');
+			$('.container-fullscreen, .image-fullscreen').css('width', no_padding +2);              
+		}
 		
-	}  
+		if($(window).width() < 766){
+			mobile_paddings()
+		}        
+		if($(window).width() > 766){
+			tablet_paddings()
+		}
+	}
+
+	$(window).resize(function() { 
+		create_paddings();
+	});
+	create_paddings();
+	showTable();
+}
+
+function showTable() {
+	myDB.transaction(function(transaction) {
+	transaction.executeSql('SELECT * FROM patients_local', [], function (tx, results) {
+		var len = results.rows.length, i;
+		for (i = 0; i < len; i++) {
+			patients[i] = {"id":results.rows.item(i).id, "name":results.rows.item(i).name, "date":results.rows.item(i).date, "image":results.rows.item(i).image};
+		}
+		displayList(patients);
+	}, null);
+	});
+}
+
+function removePatient(id) {
+	myDB.transaction(function(transaction) {
+		transaction.executeSql("DELETE FROM patients_local where id=?", [id], function(tx, result) {
+			myDB.transaction(function(transaction) {
+				transaction.executeSql("DELETE FROM drawings_local where pid=?", [id], function(tx, result) {
+					location.reload();
+				},
+				function(error){ navigator.notification.alert('Something went Wrong deleting drawings.');});
+			});
+		},
+		function(error){ navigator.notification.alert('Something went Wrong');});
+	});
+}
 
 function displayList(arr) {
 	var i;
@@ -127,15 +82,15 @@ function displayList(arr) {
 			'<div id="selected' + arr[i].id + '" class="activity-item-detail">' + 
 				'<table style="width:100%">' + 
 					'<tr>' + 
-						'<td><a href="viewlocalimage.html?imageLocation=' + arr[i].image + '"><i class="fa fa-picture-o"></i> View image</a></td>' + 
-						'<td><a href="#" onclick="sync()" class="show-bottom-notification-2 timer-notification"><i class="fa fa-refresh"></i> Sync</a></td>' + 
+						'<td><a href="#" onclick="viewImage(\'' + arr[i].image + '\')"><i class="fa fa-picture-o"></i> View image</a></td>' + 
+						'<td><a href="#" onclick="sync(\'' + arr[i].id + '\')"><i class="fa fa-refresh"></i> Sync</a></td>' + 
 					'</tr>' + 
 					'<tr>' + 
-						'<td><a href="createdrawing.html?imageLocation=' + arr[i].image + '&imageID=' + arr[i].id + '"><i class="fa fa-pencil"></i> Create drawing</a></td>' + 
+						'<td><a href="#" onclick="drawing(\'' + arr[i].image + '\', \'' + arr[i].id + '\')"><i class="fa fa-pencil"></i> Create drawing</a></td>' + 
 						'<td><a href="#" onclick="removePatient(\'' + arr[i].id + '\')"><i class="fa fa-trash"></i> Delete</a></td>' + 
 					'</tr>' +
 					'<tr>' + 
-						'<td><a href="drawingsscores.html"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
+						'<td><a href="#" onclick="drawingsScores(\'' + arr[i].id + '\')"><i class="fa fa-bar-chart"></i> View drawings and scores</a></td>' + 
 						'<td><a href="#"><i class="fa fa-times"></i> Close</a></td>' + 
 					'</tr>' + 
 				'</table>' + 
@@ -146,41 +101,79 @@ function displayList(arr) {
 	document.getElementById("id01").innerHTML = out;
 }
 
-/* When the user clicks on the button, toggle between hiding and showing the dropdown content */
+function sync(id) {
+	var uploaded = "No";
+	myDB.transaction(function(transaction) {
+		transaction.executeSql("SELECT * FROM drawings_local where pid=? AND uploaded=?", [id,uploaded], function(tx, results) {
+			if (results.rows.length == 0) {
+				 navigator.notification.alert("Already synced");
+			}
+			else {
+				var success = 1, i;
+				uploaded = "Yes";
+				for (i = 0; i < results.rows.length; i++) {
+					var dataString = "drawing=" + results.rows.item(i).drawing + "&score=" + results.rows.item(i).score + "&pid=" + results.rows.item(i).pid + "&uploaded=" + uploaded + "&insert=";
+					$.ajax({
+						type: "POST",
+						url: "https://aesthetics-tool.000webhostapp.com/insert.php",
+						data: dataString,
+						crossDomain: true,
+						cache: false,
+						success: function(data) {
+							if (data == "success") {
+								myDB.transaction(function(transaction) {
+									transaction.executeSql("UPDATE drawings_local SET uploaded=? WHERE pid=?", [uploaded,id], function(tx, result) {
+									},
+									function(error){success = 0;});
+								});
+							} else if (data == "error") {
+								success = 0;
+							}
+						}
+					});
+				}
+				if (success == 1) {
+					 navigator.notification.alert("Sync complete");
+				} else {
+					 navigator.notification.alert("Something went wrong");
+				}
+			}
+		},
+		function(error){ navigator.notification.alert('Something went Wrong');});
+	});
+}
+
+function viewImage(image) {
+	sessionStorage.setItem("link", image); 
+	window.open('viewlocalimage.html', '_self', false);
+}
+
+function drawingsScores(id) {
+	sessionStorage.setItem("pid", id); 
+	window.open('drawingsscores.html', '_self', false);
+}
+
+function drawing(image, id) {
+	sessionStorage.setItem("canvas", image); 
+	sessionStorage.setItem("pid", id); 
+	window.open('createdrawing.html', '_self', false);
+}
+
 function myFunction1(id) {
     document.getElementById("selected" + id).classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.activity-item-toggle')) {
-
-    var dropdowns = document.getElementsByClassName("activity-item-detail");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-
-function sync() {
-	$('.bottom-notification-2').slideDown(200);
-	var notification_timer = setTimeout(function(){ $('.timeout-notification').slideUp(250); },2000);
-}  
-
-function getImageLocation(name, url) {
-    if (!url) {
-      url = window.location.href;
-    }
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	if (!$(event.target).hasClass('activity-item-toggle')) {
+		var dropdowns = document.getElementsByClassName("activity-item-detail");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
 }
 
 angular.module('croppy', [])

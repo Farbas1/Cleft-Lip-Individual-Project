@@ -1,0 +1,2 @@
+C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\CordovaApp.Windows10.jsproj;x86
+C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj;x86

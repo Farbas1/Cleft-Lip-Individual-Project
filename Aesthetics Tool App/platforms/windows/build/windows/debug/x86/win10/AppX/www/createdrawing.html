@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<title>Create drawing - Aesthetics Tool</title>
+    
+	<link href="styles/main.css" rel="stylesheet" type="text/css">
+	<link href="styles/font-awesome.css" rel="stylesheet" type="text/css">
+	<link href="styles/drawing.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/paper-full.js"></script>
+	<script type="text/javascript" src="js/createdrawing.js"></script>
+	<script type="text/javascript" src="cordova.js"></script>
+	
+</head>
+<body> 
+<div id="navigation-header" class="header-border">
+	<a class="navigation-icon" href="index.html"><i class="fa fa-arrow-left fa-2x"></i></a>
+	<a class="overflow-icon" href="#"><i class="fa fa-ellipsis-v fa-2x"></i></a>
+	<a class="header-label" href="#"><img src="images/label.png" alt="label"></a>
+</div>
+<div class="header-separation"></div>
+
+<canvas id="canvas" style="overflow:hidden;position:relative;border:#999999 1px solid;margin:1vw;"></canvas>
+
+<div class="footerDraw">
+	<div class="palette-case">
+		<div class="palette-box">
+			<a class="navbtn" href="createdrawing.html">Redraw</a>
+		</div>
+		<div class="palette-box">
+			<a onclick="prepDrawing()" class="navbtn">Done</a>
+		</div>
+	</div>
+</div>
+<script>
+	var canvas = document.getElementsByTagName('canvas')[0];
+	canvas.width = window.innerWidth * 0.98;
+	canvas.height = window.innerWidth * 0.98;
+	
+	paper.install(window);
+	// Keep global references to both tools, so the HTML
+	// links below can access them.
+	var tool1, tool2;
+	var raster;
+	
+	window.onload = function() {
+		paper.setup('canvas');
+		
+		raster = new Raster(sessionStorage.getItem("canvas"));
+		raster.size = paper.view.viewSize;
+		
+		// Move the raster to the center of the view
+		raster.position = paper.view.center;
+		
+		var path, segment;
+		
+		var hitOptions = {
+            segments: true,
+            stroke: true,
+            fill: true,
+            tolerance: 5
+        };
+
+		tool1 = new Tool();
+		tool1.onMouseDown = function(event) {
+			// If we produced a path before, deselect it:
+            if (path) {
+                path.selected = false;
+            }
+
+            // Create a new path and set its stroke color to black:
+            path = new Path({
+                segments: [event.point],
+                strokeColor: 'blue',
+				fillColor: 'blue',
+                // Select the path, so we can see its segment points:
+                fullySelected: true
+            });
+		}
+
+		tool1.onMouseDrag = function(event) {
+			path.add(event.point);
+		}
+		
+		// When the mouse is released, we simplify the path:
+        tool1.onMouseUp = function(event) {
+			path.closed = true;
+
+            // When the mouse is released, simplify it:
+            path.simplify(10);
+
+            // Select the path, so we can see its segments:
+            path.fullySelected = false;
+        }
+
+		tool2 = new Tool();
+		tool2.minDistance = 20;
+		tool2.onMouseDown = function(event) {
+			segment = path = null;
+            var hitResult = project.hitTest(event.point, hitOptions);
+
+            if (event.modifiers.shift) {
+                if (hitResult.type == 'segment') {
+                    hitResult.segment.remove();
+                };
+                return;
+            }
+
+            if (hitResult) {
+                path = hitResult.item;
+                if (hitResult.type == 'segment') {
+                    segment = hitResult.segment;
+                } else if (hitResult.type == 'stroke') {
+                    var location = hitResult.location;
+                    segment = path.insert(location.index + 1, event.point);
+                    path.smooth();
+                }
+                hitResult.item.bringToFront();
+            }
+		}
+
+		tool2.onMouseDrag = function(event) {
+			if (segment) {
+                segment.point += event.delta;
+                path.smooth();
+            } else if (path) {
+                path.position += event.delta;
+            }
+		}
+		
+		tool2.onMouseMove = function(event) {
+			var hitResult = project.hitTest(event.point, hitOptions);
+            project.activeLayer.selected = false;
+            if (hitResult && hitResult.item)
+                hitResult.item.selected = true;
+
+        }
+	}
+	
+	function prepDrawing() { 
+		setTimeout(function(){ 
+			saveDrawing();
+		}, 1);  
+		raster.remove();
+	}
+	
+</script>
+</body>
+</html>
+
+	
+	

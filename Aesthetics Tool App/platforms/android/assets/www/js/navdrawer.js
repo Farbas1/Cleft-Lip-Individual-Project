@@ -1,10 +1,58 @@
-$(document).ready(function() {
+var myDB;
 
-	document.addEventListener("deviceready",onDeviceReady,false);
-	function onDeviceReady(){
-		
-	}
-    
+document.addEventListener("deviceready",onDeviceReady,false);
+function onDeviceReady(){
+//	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
+}
+/*
+function syncAll() {
+	var uploaded = "No";
+	var drawing;
+	myDB.transaction(function(transaction) {
+		transaction.executeSql("SELECT * FROM drawings_local where uploaded=?", [uploaded], function(tx, results) {
+			if (results.rows.length == 0) {
+				alert("Already synced");
+			}
+			else {
+				var success = 1, i;
+				uploaded = "Yes";
+				for (i = 0; i < results.rows.length; i++) {
+					var dataString = "drawing=" + results.rows.item(i).drawing + "&score=" + results.rows.item(i).score + "&pid=" + results.rows.item(i).pid + "&uploaded=" + uploaded + "&insert=";
+					drawing = results.rows.item(i).drawing;
+					$.ajax({
+						type: "POST",
+						url: "https://aesthetics-tool.000webhostapp.com/insert.php",
+						data: dataString,
+						crossDomain: true,
+						cache: false,
+						success: function(data) {
+							if (data == "success") {					
+								myDB.transaction(function(transaction) {
+									transaction.executeSql("UPDATE drawings_local SET uploaded=? WHERE drawing=?", [uploaded,drawing], function(tx, result) {
+										alert(drawing);
+									},
+									function(error){success = 0;});
+								});
+							} else if (data == "error") {
+								success = 0;
+							}
+						}
+					});
+				}
+				if (success == 1) {
+					alert("Sync complete");
+					location.reload();
+				} else {
+					alert("Something went wrong");
+				}
+			}
+		},
+		function(error){alert('Something went Wrong');});
+	});
+}	
+*/
+
+$(document).ready(function() {	
     if($('body').hasClass('left-sidebar')) {
 		left_sidebar();
 	}

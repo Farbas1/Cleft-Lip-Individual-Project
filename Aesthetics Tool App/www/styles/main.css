@@ -321,27 +321,6 @@
 .light-blue{background-color: #8fc3ea!important;}
 .dark-blue{background-color: #005ba8!important;}
 
-.bottom-notification{
-    display:none;
-    z-index:9999;
-    position:fixed;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    width:100%;
-    padding:15px 20px;
-	color:#FFFFFF
-}
-
-@media(min-width:568px){
-    .bottom-notification{
-        width:320px;   
-        right:40px;
-        left:auto;
-        bottom:40px;
-    }
-}
-
 * {
 	margin: 0;
 	padding: 0;

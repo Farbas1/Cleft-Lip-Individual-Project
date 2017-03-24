@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>FARBAS</Machine>
+    <WindowsUser>Farbas</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>Debug|x86</SolutionConfiguration>
+    <PackageArchitecture>x86</PackageArchitecture>
+    <PackageIdentityName>88789380-0db3-11e7-95c4-d99623d0f74c</PackageIdentityName>
+    <PackageIdentityPublisher>CN=Apache Cordova Team</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\build\windows\bld\</IntermediateOutputPath>
+    <RemoteDeploymentType></RemoteDeploymentType>
+    <PackageRegistrationPath></PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\build\windows\Debug\x86\win10\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\Debug\SQLite3.UWP\SQLite3.winmd">
+      <PackagePath>SQLite3.winmd</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\Debug\SQLite3.UWP\SQLite3.UWP.dll">
+      <PackagePath>SQLite3.UWP.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\SplashScreen.scale-100.png">
+      <PackagePath>images\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square150x150Logo.scale-100.png">
+      <PackagePath>images\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square30x30Logo.scale-100.png">
+      <PackagePath>images\Square30x30Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square310x310Logo.scale-100.png">
+      <PackagePath>images\Square310x310Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square44x44Logo.scale-100.png">
+      <PackagePath>images\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square70x70Logo.scale-100.png">
+      <PackagePath>images\Square70x70Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Square71x71Logo.scale-100.png">
+      <PackagePath>images\Square71x71Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\StoreLogo.scale-100.png">
+      <PackagePath>images\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\images\Wide310x150Logo.scale-100.png">
+      <PackagePath>images\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\icon.png">
+      <PackagePath>www\icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\images\label.png">
+      <PackagePath>www\images\label.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-hdpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-hdpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-ldpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-ldpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-mdpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-mdpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-xhdpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-xhdpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-xxhdpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-xxhdpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\res\icon\android\drawable-xxxhdpi-icon.png">
+      <PackagePath>www\res\icon\android\drawable-xxxhdpi-icon.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\about.html">
+      <PackagePath>www\about.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cloud.html">
+      <PackagePath>www\cloud.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\clouddrawingimage.html">
+      <PackagePath>www\clouddrawingimage.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\clouddrawingsscores.html">
+      <PackagePath>www\clouddrawingsscores.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\createdrawing.html">
+      <PackagePath>www\createdrawing.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\drawingsscores.html">
+      <PackagePath>www\drawingsscores.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\index.html">
+      <PackagePath>www\index.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\localdrawingimage.html">
+      <PackagePath>www\localdrawingimage.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\viewcloudimage.html">
+      <PackagePath>www\viewcloudimage.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\viewlocalimage.html">
+      <PackagePath>www\viewlocalimage.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova-js-src\confighelper.js">
+      <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova-js-src\exec.js">
+      <PackagePath>www\cordova-js-src\exec.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova-js-src\platform.js">
+      <PackagePath>www\cordova-js-src\platform.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova-js-src\splashscreen.js">
+      <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova.js">
+      <PackagePath>www\cordova.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\cordova_plugins.js">
+      <PackagePath>www\cordova_plugins.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\angular.min.js">
+      <PackagePath>www\js\angular.min.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\cloud.js">
+      <PackagePath>www\js\cloud.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\clouddrawingsscores.js">
+      <PackagePath>www\js\clouddrawingsscores.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\createdrawing.js">
+      <PackagePath>www\js\createdrawing.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\createdrawingOLD.js">
+      <PackagePath>www\js\createdrawingOLD.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\drawingsscores.js">
+      <PackagePath>www\js\drawingsscores.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\jquery-3.1.1.js">
+      <PackagePath>www\js\jquery-3.1.1.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\main.js">
+      <PackagePath>www\js\main.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\navdrawer.js">
+      <PackagePath>www\js\navdrawer.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\js\paper-full.js">
+      <PackagePath>www\js\paper-full.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-dialogs\www\notification.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\www\notification.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file-transfer\src\windows\FileTransferProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-file-transfer\src\windows\FileTransferProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file-transfer\www\FileTransfer.js">
+      <PackagePath>www\plugins\cordova-plugin-file-transfer\www\FileTransfer.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file-transfer\www\FileTransferError.js">
+      <PackagePath>www\plugins\cordova-plugin-file-transfer\www\FileTransferError.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-file\src\windows\FileProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\browser\isChrome.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryEntry.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryReader.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\Entry.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\File.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileEntry.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileError.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileReader.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileSystem.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\fileSystemPaths.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\fileSystems.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadOptions.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadResult.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\FileWriter.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\Flags.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\LocalFileSystem.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\Metadata.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\ProgressEvent.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\requestFileSystem.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
+      <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\src\windows\NetworkInfoProxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-network-information\www\Connection.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\www\Connection.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-plugin-network-information\www\network.js">
+      <PackagePath>www\plugins\cordova-plugin-network-information\www\network.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\WinJS\js\base.js">
+      <PackagePath>www\WinJS\js\base.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\css\notification.css">
+      <PackagePath>www\css\notification.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\css\splashscreen.css">
+      <PackagePath>www\css\splashscreen.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\drawing.css">
+      <PackagePath>www\styles\drawing.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\font-awesome.css">
+      <PackagePath>www\styles\font-awesome.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\main.css">
+      <PackagePath>www\styles\main.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\fontawesome-webfont.eot">
+      <PackagePath>www\styles\fonts\fontawesome-webfont.eot</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\fontawesome-webfont.svg">
+      <PackagePath>www\styles\fonts\fontawesome-webfont.svg</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\fontawesome-webfont.ttf">
+      <PackagePath>www\styles\fonts\fontawesome-webfont.ttf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\fontawesome-webfont.woff">
+      <PackagePath>www\styles\fonts\fontawesome-webfont.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\fontawesome-webfont.woff2">
+      <PackagePath>www\styles\fonts\fontawesome-webfont.woff2</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\www\styles\fonts\FontAwesome.otf">
+      <PackagePath>www\styles\fonts\FontAwesome.otf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\config.xml">
+      <PackagePath>config.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.14393.0\\redist\Debug\x86\ucrtbased.dll">
+      <PackagePath>ucrtbased.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\build\windows\Debug\x86\win10\ReverseMap\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.24210.0</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\ARM\Microsoft.VCLibs.ARM.Debug.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.24210.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x64\Microsoft.VCLibs.x64.Debug.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00.Debug</Name>
+      <Version>14.0.24210.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.Debug, MinVersion = 14.0.24210.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Debug\x86\Microsoft.VCLibs.x86.Debug.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>

@@ -1,174 +1,118 @@
-
-
-$(document).ready(function() {
-});
-	var ctx, color = "#00FF00";	
 var myDB;
 
 document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady(){
 	myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
-	myDB.transaction(function(transaction) {
-		transaction.executeSql('CREATE TABLE IF NOT EXISTS drawings (drawing text, scores text, parentid text, uploaded text)', []);
-	});
-	newCanvas();
 }
-
-  
-function selectColor(el){
-    for (var i=0;i<document.getElementsByClassName("palette").length;i++){
-        document.getElementsByClassName("palette")[i].style.borderColor = "#777";
-        document.getElementsByClassName("palette")[i].style.borderStyle = "solid";
-    }
-    el.style.borderColor = "#fff";
-    el.style.borderStyle = "dashed";
-    color = window.getComputedStyle(el).backgroundColor;
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-}
-
-// prototype to	start drawing on touch using canvas moveTo and lineTo
-var drawTouch = function() {
-	var start = function(e) {
-		ctx.beginPath();
-		x = e.changedTouches[0].pageX+33;
-		y = e.changedTouches[0].pageY-25;
-		ctx.moveTo(x,y);
-	};
-	var move = function(e) {
-		e.preventDefault();
-		x = e.changedTouches[0].pageX+33;
-		y = e.changedTouches[0].pageY-25;
-		ctx.lineTo(x,y);
-		ctx.stroke();
-	};
-    document.getElementById("canvas").addEventListener("touchstart", start, false);
-	document.getElementById("canvas").addEventListener("touchmove", move, false);
-}; 
-    
-// prototype to	start drawing on pointer(microsoft ie) using canvas moveTo and lineTo
-var drawPointer = function() {
-	var start = function(e) {
-        e = e.originalEvent;
-		ctx.beginPath();
-		x = e.pageX+33;
-		y = e.pageY-25;
-		ctx.moveTo(x,y);
-	};
-	var move = function(e) {
-		e.preventDefault();
-        e = e.originalEvent;
-		x = e.pageX+33;
-		y = e.pageY-25;
-		ctx.lineTo(x,y);
-		ctx.stroke();
-    };
-    document.getElementById("canvas").addEventListener("MSPointerDown", start, false);
-	document.getElementById("canvas").addEventListener("MSPointerMove", move, false);
-};        
-
-// prototype to	start drawing on mouse using canvas moveTo and lineTo
-var drawMouse = function() {
-	var clicked = 0;
-	var start = function(e) {
-		clicked = 1;
-		ctx.beginPath();
-		x = e.pageX+33;
-		y = e.pageY-25;
-		ctx.moveTo(x,y);
-	};
-	var move = function(e) {
-		if(clicked){
-			x = e.pageX+33;
-			y = e.pageY-25;
-			ctx.lineTo(x,y);
-			ctx.stroke();
-		}
-	};
-	var stop = function(e) {
-		clicked = 0;
-	};
-    document.getElementById("canvas").addEventListener("mousedown", start, false);
-	document.getElementById("canvas").addEventListener("mousemove", move, false);
-	document.addEventListener("mouseup", stop, false);
-};
 	
-
-	// function to setup a new canvas for drawing
-function newCanvas() {
-	//define and resize canvas
-	var image = getImageLocation('imageLocation');
-    var canvas = '<canvas id="canvas" width="400" height="600" style="max-width:98%;margin:3px; background: url(' + image + '); background-repeat: no-repeat; background-size: contain;"></canvas>';
-	document.getElementById("contentDraw").innerHTML = canvas;
-    
-    // setup canvas
-	ctx=document.getElementById("canvas").getContext("2d");
-	ctx.strokeStyle = color;
-	ctx.lineWidth = 1;	
-	
-	// setup to trigger drawing on mouse or touch
-    drawTouch();
-    drawPointer();
-	drawMouse();
-}
-
 function saveDrawing() {
-	var dataUrl = document.getElementById("canvas").toDataURL();
-	var fileTransfer = new FileTransfer();
-	var uri = encodeURI(dataUrl);
-	var imageName = getImageLocation('imageLocation');
-	var imageID = getImageLocation('imageID');
-	drawingName = imageName.split('/');
-	var fileURL = "///storage/emulated/0/Android/data/com.adobe.phonegap.app/cache/" + drawingName.pop();
-	var timeStamp = new Date();
-	fileURL = fileURL.replace(".jpg", timeStamp.getTime() + ".png");
-	fileTransfer.download(
-		uri, fileURL, function(entry) {
-			alert("Saved");
-			console.log("Save complete");
-			//Generate scores function goes here
-			var score = "90%";
-			insert(fileURL, score, imageID, "0");
-		},
+	var drawing = document.getElementById("canvas").toDataURL();
+	var pid = sessionStorage.getItem("pid");
+	var uploaded = "No";
+	var score;
+	
+	var initial = [];
+	var img = new Image();
+	img.onload = function() { 
+		var canvas = document.createElement('canvas');
+		if (img.width%2)
+			canvas.width = img.width - 1;
+		else canvas.width = img.width;
 		
-		function(error) {
-			alert("Error Saving");
-			console.log("Save error");
-		},
+		canvas.height = img.height;
+		canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
 		
-		false, {
-			headers: {
-				"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+		for (var i = 0; i < canvas.height; i++) {
+			initial[i] = [];
+		}
+		var pixelData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+		var blue = 2;
+		for (var i = 0; i < canvas.height; i++) {
+			for (var j = 0; j < canvas.width; j++) {
+				if (pixelData[blue] != 0) {
+					initial[i][j] = 1;
+				} else initial[i][j] = 0;
+				blue += 4;
 			}
 		}
-	);	
-}
+		
+		
+		var left = [];
+		var right = [];
+		var overlap = [];
+		for (var i = 0; i < initial.length; i++) {
+			left[i] = [];
+			right[i] = [];
+			overlap[i] = [];
+		}
+		
+		var ones = 0;
+		var twos = 0;
+		
+	//	console.log("Left: ");
+		for (var i = 0; i < initial.length; i++) {
+			for (var j = 0; j < initial[0].length / 2; j++) {
+				left[i][j] = initial[i][j];
+	//			console.log(left[i][j]);
+			}
+		}
 
-function insert(drawing, scores, parentid, uploaded) {
-	var myDB = window.sqlitePlugin.openDatabase({name: "mySQLite.db", location: 'default'});
-	console.log(drawing + " " + scores + " " + parentid + " " + uploaded);
-	myDB.transaction(function(transaction) {
-		alert("1");
-		var executeQuery = "INSERT INTO drawings (drawing, scores, parentid, uploaded) VALUES (?,?,?,?)";             
-		transaction.executeSql(executeQuery, [drawing, scores, parentid, uploaded]
-			, function(tx, result) {
-				alert('Inserted');
+	//	console.log("Right: ");
+		for (var i = 0; i < initial.length; i++) {
+			for (var j = initial[0].length / 2; j < initial[0].length; j++) {
+				right[i][j - initial[0].length / 2] = initial[i][j];
+	//			console.log(right[i][j - initial[0].length / 2]);
+			}
+		}
+		
+		for (var i = 0; i < right.length; i++) {
+			for (var j = 0; j < right[i].length / 2; j++) {
+				var temp = right[i][j];
+				right[i][j] = right[i][right[i].length - j - 1];
+				right[i][right[i].length - j - 1] = temp;
+			}
+		}
+		
+	//	console.log("Right mirror: ");
+		for (var i = 0; i < initial.length; i++) {
+			for (var j = 0; j < right[i].length; j++) {
+	//			console.log(right[i][j]);
+			}
+		}
+		
+		for (var i = 0; i < left.length; i++) {
+			for (var j = 0; j < left[0].length; j++) {
+				overlap[i][j] = left[i][j] + right[i][j];
+				if (overlap[i][j] == 1) {
+					ones++;
+				}
+				else if (overlap[i][j] == 2) {
+					twos++;
+				}
+			}
+		}
+		
+	//	console.log("Overlap: ");
+		for (var i = 0; i < overlap.length; i++) {
+			for (var j = 0; j < overlap[i].length; j++) {
+	//			console.log(overlap[i][j]);
+			}
+		}
+		
+		score = twos / (ones + twos) * 100;
+		score = Math.round(score * 100) / 100;
+		console.log(score + "%");
+		myDB.transaction(function(transaction) {
+			transaction.executeSql("INSERT INTO drawings_local (drawing, score, pid, uploaded) VALUES (?,?,?,?)", [drawing, score, pid, uploaded], function(tx, result) {
+				sessionStorage.setItem("pid", pid);
+				window.open('drawingsscores.html', '_self', false);
 			},
-			function(error){
-				alert('Error occurred'); 
+			function(error) {
+				 navigator.notification.alert('Error occurred'); 
 			});
-	});
-}
+		});
+	}
+	img.src = drawing;
 
-function getImageLocation(name, url) {
-    if (!url) {
-      url = window.location.href;
-    }
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+	
 }
-
