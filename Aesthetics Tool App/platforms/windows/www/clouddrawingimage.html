@@ -5,17 +5,6 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 	
 	<title>View image - Aesthetics Tool</title>
     
@@ -24,12 +13,13 @@
 	
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/paddings.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 </head>
 
 <body>
-	
+
+<!-- Header banner at the top of the page -->
 <div id="navigation-header" class="header-border">
 	<a class="navigation-icon" href="clouddrawingsscores.html"><i class="fa fa-arrow-left fa-2x"></i></a>
 	<a class="overflow-icon" href="#"><i class="fa fa-ellipsis-v fa-2x"></i></a>
@@ -39,25 +29,28 @@
 <div class="all-elements">
 	<div class="snap-drawers">
 		
+		<!-- Main page content goes here -->
 		<div id="content" class="snap-content">
 			<div class="content">
-			<div class="header-separation"></div>
-			<!--Page content goes here, fixed elements go above the all elements class-->
-
+				<div class="header-separation"></div>
+				
+				<!-- Page's title banner -->
 				<div class="title-banner container half-bottom">
 					<i class="fa fa-picture-o"></i>
 					<h1>View drawing</h1>
 					<div class="title-icon-border dark-blue"></div>
 					<div class="title-border dark-blue"></div>
 				</div>
-				<div id="image"></div>
+				
+				<!-- Image is obtained with JS and placed in this div -->
+				<div id="image">Loading...</div>
 				<script>
 					document.getElementById("image").innerHTML = '<img class="view-image-size" src="' + sessionStorage.getItem("link") + '" alt="img">';
 				</script>
 
-				<!-- End of entire page content-->
 			</div> 
 		</div>
+		
 	</div>	
 </div>
 	

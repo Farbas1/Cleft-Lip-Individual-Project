@@ -1,42 +1,60 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.miah.farbas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Aesthetics Tool</name>
-    <description>
-        An application that determines the success of cleft lip and palate surgeries.
-    </description>
-    <author email="zcabmfm@ucl.ac.uk" href="http://ucl.ac.uk">
-        Farbas Miah
-    </author>
-    <content src="index.html" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-minSdkVersion" value="14" />
-    <preference name="windows-target-version" value="10.0" />
-    <plugin name="cordova-plugin-file" source="npm" spec="~4.3.0" />
-    <plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0" />
-    <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
-    <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.3.0" />
-    <plugin name="cordova-sqlite-storage" spec="~1.5.3" />
+	<name>Aesthetics Tool</name>
+	<description>
+		An application that determines the success of cleft lip and palate surgeries.
+	</description>
+	<author email="zcabmfm@ucl.ac.uk" href="http://ucl.ac.uk">
+		Farbas Miah
+	</author>
+	
+	<content src="index.html" />
+	
+	<preference name="DisallowOverscroll" value="true" />
+	<preference name="android-minSdkVersion" value="14" />
+	<preference name="windows-target-version" value="10.0" />
+	
+	<plugin name="cordova-plugin-file" source="npm" spec="~4.3.0" />
+	<plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.5.0" />
+	<plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0" />
+	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.3.0" />
+	<plugin name="cordova-sqlite-storage" spec="~1.5.3" />
 	<plugin name="cordova-plugin-dialogs" spec="~1.3.2" />
-    <icon src="icon.png" />
-    <platform name="android">
-        <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
-        <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
-        <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
-        <icon density="xhdpi" src="www/res/icon/android/drawable-xhdpi-icon.png" />
-        <icon density="xxhdpi" src="www/res/icon/android/drawable-xxhdpi-icon.png" />
-        <icon density="xxxhdpi" src="www/res/icon/android/drawable-xxxhdpi-icon.png" />
-    </platform>
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <platform name="android">
-        <allow-navigation href="*" />
-        <allow-intent href="market:*" />
-    </platform>
-    <engine name="android" spec="~6.0.0" />
-    <engine name="windows" spec="~4.4.3" />
+	
+	<icon src="res/icon.png" />
+	<platform name="android">
+	<icon density="ldpi" src="res/android/ldpi.png" />
+	<icon density="mdpi" src="res/android/mdpi.png" />
+	<icon density="hdpi" src="res/android/hdpi.png" />
+	<icon density="xhdpi" src="res/android/xhdpi.png" />
+	<icon density="xxhdpi" src="res/android/xxhdpi.png" />
+	<icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
+	</platform>
+	
+	<platform name="windows">
+	<icon src="res/windows/storelogo.png" target="StoreLogo" />
+	<icon src="res/windows/smalllogo.png" target="Square30x30Logo" />
+	<icon src="res/Windows/Square44x44Logo.png" target="Square44x44Logo" />
+	<icon src="res/Windows/Square70x70Logo.png" target="Square70x70Logo" />
+	<icon src="res/Windows/Square71x71Logo.png" target="Square71x71Logo" />
+	<icon src="res/Windows/Square150x150Logo.png" target="Square150x150Logo" />
+	<icon src="res/Windows/Square310x310Logo.png" target="Square310x310Logo" />
+	<icon src="res/Windows/Wide310x150Logo.png" target="Wide310x150Logo" />
+	</platform>
+	
+	<access origin="*" />
+	<allow-intent href="http://*/*" />
+	<allow-intent href="https://*/*" />
+	<allow-intent href="tel:*" />
+	<allow-intent href="sms:*" />
+	<allow-intent href="mailto:*" />
+	<allow-intent href="geo:*" />
+	
+	<platform name="android">
+		<allow-navigation href="*" />
+		<allow-intent href="market:*" />
+	</platform>
+	
+	<engine name="windows" spec="~4.4.3" />
+	<engine name="android" spec="~6.1.0" />
 </widget>

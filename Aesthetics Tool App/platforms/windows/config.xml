@@ -2,13 +2,13 @@
 <widget id="com.miah.farbas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Aesthetics Tool</name>
     <description>
-        An application that determines the success of cleft lip and palate surgeries.
-    </description>
+		An application that determines the success of cleft lip and palate surgeries.
+	</description>
     <author email="zcabmfm@ucl.ac.uk" href="http://ucl.ac.uk">
-        Farbas Miah
-    </author>
+		Farbas Miah
+	</author>
     <content src="index.html" />
-    <icon src="icon.png" />
+    <icon src="res/icon.png" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -16,6 +16,14 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon src="res/windows/storelogo.png" target="StoreLogo" />
+    <icon src="res/windows/smalllogo.png" target="Square30x30Logo" />
+    <icon src="res/Windows/Square44x44Logo.png" target="Square44x44Logo" />
+    <icon src="res/Windows/Square70x70Logo.png" target="Square70x70Logo" />
+    <icon src="res/Windows/Square71x71Logo.png" target="Square71x71Logo" />
+    <icon src="res/Windows/Square150x150Logo.png" target="Square150x150Logo" />
+    <icon src="res/Windows/Square310x310Logo.png" target="Square310x310Logo" />
+    <icon src="res/Windows/Wide310x150Logo.png" target="Wide310x150Logo" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="windows-target-version" value="10.0" />

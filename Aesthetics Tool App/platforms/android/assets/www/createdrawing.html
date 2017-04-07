@@ -5,6 +5,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	
 	<title>Create drawing - Aesthetics Tool</title>
     
 	<link href="styles/main.css" rel="stylesheet" type="text/css">
@@ -16,46 +17,62 @@
 	<script type="text/javascript" src="js/paper-full.js"></script>
 	<script type="text/javascript" src="js/createdrawing.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
-	
 </head>
-<body> 
+
+<body>
+
+<!-- Header banner at the top of the page -->
 <div id="navigation-header" class="header-border">
 	<a class="navigation-icon" href="index.html"><i class="fa fa-arrow-left fa-2x"></i></a>
 	<a class="overflow-icon" href="#"><i class="fa fa-ellipsis-v fa-2x"></i></a>
 	<a class="header-label" href="#"><img src="images/label.png" alt="label"></a>
 </div>
+
+<!-- Stops overlap of the canvas and banner -->
 <div class="header-separation"></div>
 
 <canvas id="canvas" style="overflow:hidden;position:relative;border:#999999 1px solid;margin:1vw;"></canvas>
 
-<div class="footerDraw">
-	<div class="palette-case">
-		<div class="palette-box">
+
+<!-- Bottom toolbar with buttons -->
+<div class="toolbar">
+	<div class="case">
+		<div class="box">
 			<a class="navbtn" href="createdrawing.html">Redraw</a>
 		</div>
-		<div class="palette-box">
-			<a onclick="prepDrawing()" class="navbtn">Done</a>
+		<div class="box">
+			<a class="navbtn" onclick="prepDrawing()">Done</a>
 		</div>
 	</div>
 </div>
+
+<!-- Script which allows drawing over an image and then saves it -->
 <script>
 	var canvas = document.getElementsByTagName('canvas')[0];
-	canvas.width = window.innerWidth * 0.98;
-	canvas.height = window.innerWidth * 0.98;
+	
+	// Sets the canvas to fit the largest region of the device's screen
+	if (window.innerWidth <= window.innerHeight) {
+		canvas.width = window.innerWidth * 0.98;
+		canvas.height = window.innerWidth * 0.98;
+	}
+	else {
+		canvas.width = window.innerHeight * 0.98 - 110;
+		canvas.height = window.innerHeight * 0.98 - 110;
+	}
 	
 	paper.install(window);
-	// Keep global references to both tools, so the HTML
-	// links below can access them.
+	// Keep global references to both tools, so the HTML links below can access them.
 	var tool1, tool2;
 	var raster;
 	
 	window.onload = function() {
 		paper.setup('canvas');
 		
+		// Sets patient's image as background
 		raster = new Raster(sessionStorage.getItem("canvas"));
 		raster.size = paper.view.viewSize;
 		
-		// Move the raster to the center of the view
+		// Move the image to the centre of the view
 		raster.position = paper.view.center;
 		
 		var path, segment;
@@ -67,6 +84,7 @@
             tolerance: 5
         };
 
+		// Tool 1 allows the drawing to be created with segments
 		tool1 = new Tool();
 		tool1.onMouseDown = function(event) {
 			// If we produced a path before, deselect it:
@@ -77,8 +95,8 @@
             // Create a new path and set its stroke color to black:
             path = new Path({
                 segments: [event.point],
-                strokeColor: 'blue',
-				fillColor: 'blue',
+                strokeColor: new Color(0, 0, 1, 0.5),
+				fillColor: new Color(0, 0, 1, 0.5),
                 // Select the path, so we can see its segment points:
                 fullySelected: true
             });
@@ -99,6 +117,7 @@
             path.fullySelected = false;
         }
 
+		// Tool 2 allows the user to adjust the segments to refine the shape of the drawing. NOT IMPLEMENTED
 		tool2 = new Tool();
 		tool2.minDistance = 20;
 		tool2.onMouseDown = function(event) {
@@ -143,10 +162,11 @@
         }
 	}
 	
+	// Save the canvas drawing
 	function prepDrawing() { 
-		setTimeout(function(){ 
+		setTimeout(function() {
 			saveDrawing();
-		}, 1);  
+		}, 100);
 		raster.remove();
 	}
 	
