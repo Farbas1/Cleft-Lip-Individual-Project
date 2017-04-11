@@ -9,7 +9,7 @@
     <SolutionConfiguration>debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>88789380-0db3-11e7-95c4-d99623d0f74c</PackageIdentityName>
-    <PackageIdentityPublisher>CN=Apache Cordova Team</PackageIdentityPublisher>
+    <PackageIdentityPublisher>CN=%24username%24</PackageIdentityPublisher>
     <IntermediateOutputPath>C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\platforms\windows\build\windows\bld\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>

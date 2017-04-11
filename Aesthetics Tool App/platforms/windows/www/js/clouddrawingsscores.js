@@ -13,7 +13,7 @@ function onDeviceReady() {
 // Obtain the data of the drawings that have been uploaded to the cloud database for a selected patient
 function cloudTable() {
 	var count = 0;
-	var url = "https://aesthetics-tool.000webhostapp.com/jsondrawing.php";
+	var url = "https://aesthetics-tool.000webhostapp.com/drawing_list.php";
 	
 	$.getJSON(url, function(result) {
 		$.each(result, function(i, field) {

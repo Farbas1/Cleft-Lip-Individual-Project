@@ -79,7 +79,7 @@ function sync(drawing, score, pid, uploaded) {
 		
 		$.ajax({
 			type: "POST",
-			url: "https://aesthetics-tool.000webhostapp.com/insert.php",
+			url: "https://aesthetics-tool.000webhostapp.com/upload_drawing.php",
 			data: dataString,
 			crossDomain: true,
 			cache: false,

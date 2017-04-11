@@ -18,7 +18,8 @@
         <Application Id="com.miah.farbas" StartPage="ms-appx-web://com.miah.farbas/www/index.html">
             <uap:VisualElements BackgroundColor="#464646" Description="An application that determines the success of cleft lip and palate surgeries." DisplayName="Aesthetics Tool" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
                 <uap:SplashScreen Image="images\splashscreen.png" />
-                <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />
+                <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png">
+                </uap:DefaultTile>
                 <uap:InitialRotationPreference>
                     <uap:Rotation Preference="portrait" />
                     <uap:Rotation Preference="landscape" />

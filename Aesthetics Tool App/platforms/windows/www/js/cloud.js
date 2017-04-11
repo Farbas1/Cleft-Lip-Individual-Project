@@ -13,7 +13,7 @@ function onDeviceReady() {
 // Obtain the data of the patients that are available for download on the cloud database.
 function cloudTable() {
 	var count = 0;
-	var url = "https://aesthetics-tool.000webhostapp.com/json.php";
+	var url = "https://aesthetics-tool.000webhostapp.com/patient_list.php";
 	$.getJSON(url, function(result) {
 		$.each(result, function(i, field) {
 			patients[count] = {"id":field.id, "name":field.name, "date":field.date, "image":field.image};

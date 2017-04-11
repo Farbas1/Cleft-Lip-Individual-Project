@@ -7,7 +7,7 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="com.miah.farbas" Publisher="CN=Apache Cordova Team" Version="1.0.0.0" ProcessorArchitecture="x64" />
+  <Identity Name="com.miah.farbas" Publisher="CN=$username$" Version="1.0.0.0" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="88789380-0db3-11e7-95c4-d99623d0f74c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Aesthetics Tool</DisplayName>
@@ -26,7 +26,7 @@
     <Application Id="com.miah.farbas" StartPage="ms-appx-web://com.miah.farbas/www/index.html">
       <uap:VisualElements BackgroundColor="#464646" Description="An application that determines the success of cleft lip and palate surgeries." DisplayName="Aesthetics Tool" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
         <uap:SplashScreen Image="images\splashscreen.png" />
-        <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />
+        <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png"></uap:DefaultTile>
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="landscape" />
