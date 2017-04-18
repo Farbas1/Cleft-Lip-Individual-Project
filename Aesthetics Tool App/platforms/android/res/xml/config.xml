@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.miah.farbas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.miah.farbas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://cordova.apache.org/ns/1.0">
     <feature name="Notification">
         <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
     </feature>
@@ -23,11 +23,11 @@
     </feature>
     <name>Aesthetics Tool</name>
     <description>
-        An application that determines the success of cleft lip and palate surgeries.
-    </description>
+		An application that determines the success of cleft lip and palate surgeries.
+	</description>
     <author email="zcabmfm@ucl.ac.uk" href="http://ucl.ac.uk">
-        Farbas Miah
-    </author>
+		Farbas Miah
+	</author>
     <content src="index.html" />
     <icon src="res/icon.png" />
     <access origin="*" />

@@ -96,7 +96,7 @@ function sync(id) {
 					var dataString = "drawing=" + results.rows.item(i).drawing + "&score=" + results.rows.item(i).score + "&pid=" + results.rows.item(i).pid + "&uploaded=" + uploaded + "&insert=";
 					$.ajax({
 						type: "POST",
-						url: "https://aesthetics-tool.000webhostapp.com/insert.php",
+						url: "https://aesthetics-tool.000webhostapp.com/upload_drawing.php",
 						data: dataString,
 						crossDomain: true,
 						cache: false,

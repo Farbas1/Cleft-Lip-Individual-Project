@@ -50,6 +50,9 @@
 <script>
 	var canvas = document.getElementsByTagName('canvas')[0];
 	
+	// Checks if drawing has been created
+	var drawn = 0;
+	
 	// Sets the canvas to fit the largest region of the device's screen
 	if (window.innerWidth <= window.innerHeight) {
 		canvas.width = window.innerWidth * 0.98;
@@ -95,8 +98,8 @@
             // Create a new path and set its stroke color to black:
             path = new Path({
                 segments: [event.point],
-                strokeColor: new Color(0, 0, 1, 0.5),
-				fillColor: new Color(0, 0, 1, 0.5),
+                strokeColor: new Color(0, 0, 1, 0.2),
+				fillColor: new Color(0, 0, 1, 0.2),
                 // Select the path, so we can see its segment points:
                 fullySelected: true
             });
@@ -104,6 +107,7 @@
 
 		tool1.onMouseDrag = function(event) {
 			path.add(event.point);
+			drawn = 1;
 		}
 		
 		// When the mouse is released, we simplify the path:
@@ -117,7 +121,7 @@
             path.fullySelected = false;
         }
 
-		// Tool 2 allows the user to adjust the segments to refine the shape of the drawing. NOT IMPLEMENTED
+		// Tool 2 allows the user to adjust the segments (control points) to refine the shape of the drawing. NOT IMPLEMENTED
 		tool2 = new Tool();
 		tool2.minDistance = 20;
 		tool2.onMouseDown = function(event) {
@@ -163,16 +167,16 @@
 	}
 	
 	// Save the canvas drawing
-	function prepDrawing() { 
-		setTimeout(function() {
-			saveDrawing();
-		}, 100);
-		raster.remove();
+	function prepDrawing() {
+		if (drawn == 1) {
+			setTimeout(function() {
+				saveDrawing();
+			}, 100);
+			raster.remove();
+		}
+		else navigator.notification.alert('Create a drawing before submitting.');
 	}
 	
 </script>
 </body>
 </html>
-
-	
-	
