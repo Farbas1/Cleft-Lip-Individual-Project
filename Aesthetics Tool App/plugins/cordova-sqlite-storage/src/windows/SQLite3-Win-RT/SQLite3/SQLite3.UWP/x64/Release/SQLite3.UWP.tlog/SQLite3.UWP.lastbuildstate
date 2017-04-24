@@ -1,2 +1,0 @@
-#TargetFrameworkVersion=:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.10586.0
-release|x64|C:\Users\Farbas\Google Drive\Cleft-Lip-Individual-Project\Aesthetics Tool App\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\|

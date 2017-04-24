@@ -85,10 +85,6 @@
     <PropertyGroup>
         <PreBuildEvent>node "$(ProjectDir)\\cordova\\prebuild-10.js"</PreBuildEvent>
         <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-        <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-        <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-        <PackageCertificateThumbprint>48525DC05426C45D9234817982489BA4FB9718A5</PackageCertificateThumbprint>
-        <PackageCertificateKeyFile>CordovaApp.Windows10_TemporaryKey.pfx</PackageCertificateKeyFile>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj" />

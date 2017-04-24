@@ -16,7 +16,7 @@ function saveDrawing() {
 	
 	var initial = [];
 	var img = new Image();
-	img.onload = function() { 
+	img.onload = function() {
 		var canvas = document.createElement('canvas');
 		
 		// Make sure the image has an even number of width pixels

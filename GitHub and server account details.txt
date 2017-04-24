@@ -1,0 +1,14 @@
+GitHub:
+Username: zcabmfm@ucl.ac.uk
+Password: cleftlipcomp3091
+Repository: https://github.com/Farbas1/Cleft-Lip-Individual-Project
+
+
+000webhost:
+Username: zcabmfm@ucl.ac.uk
+Password: cleftlipcomp3091
+URL: https://www.000webhost.com/cpanel-login
+
+DB name: id246172_cloud
+DB user: id246172_farbas
+DB password: comp3091

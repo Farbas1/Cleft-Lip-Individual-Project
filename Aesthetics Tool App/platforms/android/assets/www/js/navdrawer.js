@@ -1,22 +1,23 @@
-// Displays the drop down menu for a selected item with the onclick event
+// Displays the dropdown menu for a selected item with the onclick event
 function toggle(selected) {
     document.getElementById("selected" + selected).classList.toggle("show");
 }
 
 window.onclick = function(event) {
 	if (!$(event.target).hasClass('activity-item-toggle')) {
-		var dropdowns = document.getElementsByClassName("activity-item-detail");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
+		var details = document.getElementsByClassName("activity-item-detail");
+		var x;
+		for (x = 0; x < details.length; x++) {
+			var expand = details[x];
+			if (expand.classList.contains('show')) {
+				expand.classList.remove('show');
 			}
 		}
 	}
 }
 
-//Displays the thumbnail for each list item
+// Displays the thumbnail for each list item
+// Taken from http://stackoverflow.com/a/22374423
 angular.module('croppy', []).directive('croppedImage', function () {
 	return {
 		restrict: "E",
@@ -40,7 +41,7 @@ $(document).ready(function() {
 	$div.attr('id', 'footer-fixed');
 	$div.attr('class', 'not-active');
 	
-	var snapper = new Snap({
+	var drawer = new Snap({
 		element: document.getElementById('content'),
 		elementMirror: document.getElementById('navigation-header'),
 		elementMirror2: document.getElementById('footer-fixed'),
@@ -51,18 +52,20 @@ $(document).ready(function() {
 		minPosition: -266
 	});  
 	
-	$('.close-sidebar').click(function(){snapper.close();});
+	$('.close-sidebar').click(function(){drawer.close();});
 	
 	$('.open-left-sidebar').click(function() {
-		if (snapper.state().state=="left") {
-			snapper.close();
+		if (drawer.state().state == "left") {
+			drawer.close();
 		} else {
-			snapper.open('left');
+			drawer.open('left');
 		}
 		return false;
 	});
 	
-	snapper.on('open', function(){$('.back-to-top-badge').removeClass('back-to-top-badge-visible');}); 
+	drawer.on('open', function() {
+		$('.back-to-top-badge').removeClass('back-to-top-badge-visible');
+	}); 
 });
 
 // Navigation drawer functionality with Snap.js

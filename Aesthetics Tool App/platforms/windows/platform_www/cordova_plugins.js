@@ -1,6 +1,20 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "id": "cordova-plugin-dialogs.notification",
+        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+        "pluginId": "cordova-plugin-dialogs",
+        "merges": [
+            "navigator.notification"
+        ]
+    },
+    {
+        "id": "cordova-plugin-dialogs.NotificationProxy",
+        "file": "plugins/cordova-plugin-dialogs/src/windows/NotificationProxy.js",
+        "pluginId": "cordova-plugin-dialogs",
+        "runs": true
+    },
+    {
         "id": "cordova-plugin-file.DirectoryEntry",
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "pluginId": "cordova-plugin-file",
@@ -233,32 +247,18 @@ module.exports = [
         "file": "plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3JS/js/SQLite3.js",
         "pluginId": "cordova-sqlite-storage",
         "runs": true
-    },
-    {
-        "id": "cordova-plugin-dialogs.notification",
-        "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-        "pluginId": "cordova-plugin-dialogs",
-        "merges": [
-            "navigator.notification"
-        ]
-    },
-    {
-        "id": "cordova-plugin-dialogs.NotificationProxy",
-        "file": "plugins/cordova-plugin-dialogs/src/windows/NotificationProxy.js",
-        "pluginId": "cordova-plugin-dialogs",
-        "runs": true
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "cordova-plugin-compat": "1.1.0",
+    "cordova-plugin-dialogs": "1.3.2",
     "cordova-plugin-file": "4.3.0",
     "cordova-plugin-file-transfer": "1.5.1",
     "cordova-plugin-network-information": "1.2.1",
     "cordova-plugin-whitelist": "1.3.0",
-    "cordova-sqlite-storage": "1.5.3",
-    "cordova-plugin-dialogs": "1.3.2"
+    "cordova-sqlite-storage": "1.5.3"
 };
 // BOTTOM OF METADATA
 });

@@ -125,44 +125,15 @@
 		tool2 = new Tool();
 		tool2.minDistance = 20;
 		tool2.onMouseDown = function(event) {
-			segment = path = null;
-            var hitResult = project.hitTest(event.point, hitOptions);
-
-            if (event.modifiers.shift) {
-                if (hitResult.type == 'segment') {
-                    hitResult.segment.remove();
-                };
-                return;
-            }
-
-            if (hitResult) {
-                path = hitResult.item;
-                if (hitResult.type == 'segment') {
-                    segment = hitResult.segment;
-                } else if (hitResult.type == 'stroke') {
-                    var location = hitResult.location;
-                    segment = path.insert(location.index + 1, event.point);
-                    path.smooth();
-                }
-                hitResult.item.bringToFront();
-            }
+			
 		}
 
 		tool2.onMouseDrag = function(event) {
-			if (segment) {
-                segment.point += event.delta;
-                path.smooth();
-            } else if (path) {
-                path.position += event.delta;
-            }
+			
 		}
 		
 		tool2.onMouseMove = function(event) {
-			var hitResult = project.hitTest(event.point, hitOptions);
-            project.activeLayer.selected = false;
-            if (hitResult && hitResult.item)
-                hitResult.item.selected = true;
-
+			
         }
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
     <Identity Name="com.miah.farbas" Publisher="CN=$username$" Version="1.0.0.0" />
-    <mp:PhoneIdentity PhoneProductId="88789380-0db3-11e7-95c4-d99623d0f74c" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
+    <mp:PhoneIdentity PhoneProductId="624e90f0-2781-11e7-9527-bb8a0e66a9e8" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
     <Properties>
         <DisplayName>Aesthetics Tool</DisplayName>
         <PublisherDisplayName>Farbas Miah</PublisherDisplayName>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package IgnorableNamespaces="uap mp" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10">
     <Identity Name="com.miah.farbas" Publisher="CN=$username$" Version="1.0.0.0" />
-    <mp:PhoneIdentity PhoneProductId="88789380-0db3-11e7-95c4-d99623d0f74c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+    <mp:PhoneIdentity PhoneProductId="624e90f0-2781-11e7-9527-bb8a0e66a9e8" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
     <Properties>
         <DisplayName>Aesthetics Tool</DisplayName>
         <PublisherDisplayName>Farbas Miah</PublisherDisplayName>
@@ -18,8 +18,7 @@
         <Application Id="com.miah.farbas" StartPage="ms-appx-web://com.miah.farbas/www/index.html">
             <uap:VisualElements BackgroundColor="#464646" Description="An application that determines the success of cleft lip and palate surgeries." DisplayName="Aesthetics Tool" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
                 <uap:SplashScreen Image="images\splashscreen.png" />
-                <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png">
-                </uap:DefaultTile>
+                <uap:DefaultTile ShortName="Aesthetics Tool" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />
                 <uap:InitialRotationPreference>
                     <uap:Rotation Preference="portrait" />
                     <uap:Rotation Preference="landscape" />
